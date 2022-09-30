@@ -73,14 +73,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\glew-2.1.0\include\GL;C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\glm;C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\SDL2-2.24.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\glew-2.1.0\lib\Release\Win32;C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\SDL2-2.24.0\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Administrator\Desktop\s233122\Programing For Graphics\glew-2.1.0\include\GL;C:\Users\Administrator\Desktop\s233122\Programing For Graphics\glm;C:\Users\Administrator\Desktop\s233122\Programing For Graphics\SDL2-2.24.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Administrator\Desktop\s233122\Programing For Graphics\glew-2.1.0\lib\Release\Win32;C:\Users\Administrator\Desktop\s233122\Programing For Graphics\SDL2-2.24.0\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\glew-2.1.0\include\GL;C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\glm;C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\SDL2-2.24.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\glew-2.1.0\lib\Release\Win32;C:\Users\Administrator\Desktop\s233122\ProgramingForGraphics\SDL2-2.24.0\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Administrator\Desktop\s233122\Programing For Graphics\glew-2.1.0\include\GL;C:\Users\Administrator\Desktop\s233122\Programing For Graphics\glm;C:\Users\Administrator\Desktop\s233122\Programing For Graphics\SDL2-2.24.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Administrator\Desktop\s233122\Programing For Graphics\glew-2.1.0\lib\Release\Win32;C:\Users\Administrator\Desktop\s233122\Programing For Graphics\SDL2-2.24.0\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
