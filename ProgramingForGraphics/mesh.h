@@ -19,7 +19,4 @@ private:
 	GLuint m_vertexArrayObject = 0;
 };
 
-
 #endif
-
-int main();

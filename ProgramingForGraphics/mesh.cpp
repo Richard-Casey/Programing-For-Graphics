@@ -3,7 +3,6 @@
 
 Mesh::Mesh(float* verts, unsigned int vertCount)
 {
-	
 	glGenVertexArrays(1, &m_vertexArrayObject);
 	glBindVertexArray(m_vertexArrayObject);
 	glEnableVertexAttribArray(0);
