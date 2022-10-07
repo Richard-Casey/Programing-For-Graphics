@@ -6,6 +6,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <SDL.h>
 #include <iostream>
+#include "mesh.h"
+#include "Transform.h"
+#include "main.h"
+
 
 using namespace std;
 #undef main
@@ -31,10 +35,9 @@ void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& 
 }
 
 
-
 int main(int argc, char *argv[])
 {
-
+	
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -73,11 +76,15 @@ int main(int argc, char *argv[])
 
 	float Verticies2[]{
 
-		0.0f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f
+		-0.5f, 0.0f, -0.5f,
+		0.0f, -1.0f, -0.5f,
+		-1.0f, -1.0f, -0.5f
 
 	};
+
+	Mesh Tri1(Verticies, 3);
+
+	
 
 
 	GLuint VertexBufferObject = 0;
@@ -111,17 +118,19 @@ int main(int argc, char *argv[])
 	glBindVertexArray(0);
 
 	const char* VertexShaderCode =
+		
 		"#version 450\n"
 		"in vec3 vp;"
+		"uniform mat4 model;"
 		"void main() {"
-		"   gl_Position = vec4(vp, 1.0);"
+		"   gl_Position = model * vec4(vp, 1.0);"
 		"}";
 
 	const char* FragmentShaderCode =
 		"#version 450\n"
 		"out vec4 frag_colour;"
 		"void main() {"
-		"   frag_colour = vec4(1.0, 0.0, 0.5, 1.0);" // Fill colour in RGBA
+		"   frag_colour = vec4(0.0, 0.5, 1.0, 1.0);" // Fill colour in RGBA
 		"}";
 
 	GLuint VertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -142,17 +151,31 @@ int main(int argc, char *argv[])
 	CheckShaderError(ShaderPrograme, GL_VALIDATE_STATUS, true,
 		"Error; Program is invalid: ");
 
+	
 
 	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
 	glViewport(0, 0, 800, 600);
+
+	Tri1.Draw();
+
+	Tri1.trans.SetPos(vec3 (0, 0, 0));
 
 	while (true)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(ShaderPrograme);
+		
+		vec3 SlowRotate = Tri1.trans.GetRot();
+		SlowRotate[0] += 0.01;
+		Tri1.trans.SetRot(SlowRotate);
+
 		glBindVertexArray(VertexArrayObject);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glUseProgram(ShaderPrograme);
+
+		GLint modelLoc = glGetUniformLocation(ShaderPrograme, "model");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &Tri1.trans.GetModel()[0][0]);
+
 		glBindVertexArray(VertexArrayObject1);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 

@@ -1,1 +1,7 @@
-﻿  ProgramingForGraphics.vcxproj -> C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\Debug\ProgramingForGraphics.exe
+﻿  main.cpp
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\main.cpp(169,24): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+  ProgramingForGraphics.vcxproj -> C:\Users\Administrator\Desktop\s233122\Programing For Graphics\Debug\ProgramingForGraphics.exe
