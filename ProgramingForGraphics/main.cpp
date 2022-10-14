@@ -9,6 +9,8 @@
 #include "mesh.h"
 #include "Transform.h"
 #include "main.h"
+#include "Input.h"
+#include "Camera.h"
 
 
 using namespace std;
@@ -82,6 +84,9 @@ int main(int argc, char *argv[])
 
 	};
 
+	Camera* cam = new Camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
+	cam->SetCamPos(vec3(0, 0, -5));
+
 	Mesh Tri1(Verticies, 3);
 
 	
@@ -122,8 +127,10 @@ int main(int argc, char *argv[])
 		"#version 450\n"
 		"in vec3 vp;"
 		"uniform mat4 model;"
+		"uniform mat4 view;"
+		"uniform mat4 perspective;"
 		"void main() {"
-		"   gl_Position = model * vec4(vp, 1.0);"
+		"   gl_Position = perspective * view * model * vec4(vp, 1.0);"
 		"}";
 
 	const char* FragmentShaderCode =
@@ -159,9 +166,38 @@ int main(int argc, char *argv[])
 	Tri1.Draw();
 
 	Tri1.trans.SetPos(vec3 (0, 0, 0));
-
+	Input* input = new Input();
 	while (true)
 	{
+
+		input->Update();
+
+		if (input->KeyIsPressed(KEY_W))
+		{
+			vec3  pos = cam->GetCamPos();
+			pos.z += 1;
+			cam->SetCamPos(pos);
+		}
+
+		if (input->KeyIsPressed(KEY_A))
+		{
+			// Left
+		}
+
+		if (input->KeyIsPressed(KEY_S))
+		{
+			// Back
+			vec3  pos = cam->GetCamPos();
+			pos.z += -1;
+			cam->SetCamPos(pos);
+		}
+
+		if (input->KeyIsPressed(KEY_D))
+		{
+			// Right
+		}
+
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(ShaderPrograme);
 		
@@ -175,6 +211,14 @@ int main(int argc, char *argv[])
 
 		GLint modelLoc = glGetUniformLocation(ShaderPrograme, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &Tri1.trans.GetModel()[0][0]);
+
+		GLint ViewLoc = glGetUniformLocation(ShaderPrograme, "view");
+		glUniformMatrix4fv(ViewLoc, 1, GL_FALSE, &cam->getCamerView()[0][0]);
+
+		GLint perspectivLoc = glGetUniformLocation(ShaderPrograme, "perspective");
+		glUniformMatrix4fv(perspectivLoc, 1, GL_FALSE, &cam->GetPerspective()[0][0]);
+
+
 
 		glBindVertexArray(VertexArrayObject1);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -193,6 +237,9 @@ int main(int argc, char *argv[])
 
 	while (true)
 	{
+		
+
+
 		glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, 800, 600);

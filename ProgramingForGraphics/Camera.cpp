@@ -1,7 +1,32 @@
 #include "Camera.h"
-#include "Transform.h"
 
-Camera::Camera(float* verts, unsigned int vertCount)
+
+vec3 Camera::GetCamPos()
+{
+	return c_Position;
+}
+vec3 Camera::GetCamRot()
+{
+	return c_Rotation;
+}
+vec3 Camera::GetCamScale()
+{
+	return c_Scale;
+}
+void Camera::SetCamPos(vec3 newPos) { c_Position = newPos; }
+void Camera::SetCamRot(vec3 newRot) { c_Rotation = newRot; }
+void Camera::SetCamScale(vec3 newScale) { c_Scale = newScale; }
+
+
+
+
+
+
+
+
+
+
+/*Camera::Camera(float* verts, unsigned int vertCount)
 {
 	glGenVertexArrays(1, &c_vertexArrayObject);
 	glBindVertexArray(c_vertexArrayObject);
@@ -19,5 +44,5 @@ Camera::Camera(float* verts, unsigned int vertCount)
 Camera::~Camera()
 {
 	glDeleteVertexArrays(1, &c_vertexArrayObject);
-}
+}*/
 

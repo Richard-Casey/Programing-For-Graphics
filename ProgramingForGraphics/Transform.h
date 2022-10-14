@@ -27,6 +27,7 @@ public:
 	~Transform()
 	{
 	}
+
 	inline mat4 GetModel() const
 	{
 		mat4 posMatric = translate(m_position);
