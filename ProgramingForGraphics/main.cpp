@@ -87,6 +87,10 @@ int main(int argc, char *argv[])
 	Camera* cam = new Camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
 	cam->SetCamPos(vec3(0, 0, -5));
 
+	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.5f, 100.0f);
+
+	
+
 	Mesh Tri1(Verticies, 3);
 
 	
@@ -169,32 +173,38 @@ int main(int argc, char *argv[])
 	Input* input = new Input();
 	while (true)
 	{
-
+		// This moves the camera
 		input->Update();
 
 		if (input->KeyIsPressed(KEY_W))
 		{
 			vec3  pos = cam->GetCamPos();
-			pos.z += 1;
+			pos.z += 0.1;
 			cam->SetCamPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_A))
 		{
-			// Left
+			vec3  pos = cam->GetCamPos();
+			pos.x += -0.1;
+			cam->SetCamPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_S))
 		{
 			// Back
 			vec3  pos = cam->GetCamPos();
-			pos.z += -1;
+			pos.z += -0.1;
 			cam->SetCamPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_D))
 		{
-			// Right
+
+			vec3  pos = cam->GetCamPos();
+			pos.x += 0.1;
+			cam->SetCamPos(pos);
+
 		}
 
 

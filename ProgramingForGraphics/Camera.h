@@ -23,9 +23,12 @@ public:
 	vec3 GetCamPos();
 	vec3 GetCamRot();
 	vec3 GetCamScale();
+	vec3 GetLookingAt();
 	void SetCamPos(vec3);
 	void SetCamRot(vec3);
 	void SetCamScale(vec3);
+	void SetLookingAt(vec3);
+	
 	void Draw();
 	~Camera();
 
@@ -48,6 +51,9 @@ private:
 	vec3 c_Position;
 	vec3 c_Rotation;
 	vec3 c_Scale;
+
+	vec3 LookingAt = c_Position;
+	
 	GLuint c_vertexBufferObject = 0;
 	GLuint c_vertexArrayObject = 0;
 	mat4 perspective;
