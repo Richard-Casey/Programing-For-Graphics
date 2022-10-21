@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include "Camera.h"
 
-void Input::Update(void) // Full comments through GED input.ccp
+void Input::Update(void) // Full comments through Game Engine Design input.ccp
 {
 	while (SDL_PollEvent(&m_Event) != NULL)
 	{
@@ -33,6 +33,7 @@ void Input::Update(void) // Full comments through GED input.ccp
 			case SDLK_d:
 				m_KeysPressed[KEY_D] = true;
 				break;
+
 			}
 
 		}
@@ -59,6 +60,7 @@ void Input::Update(void) // Full comments through GED input.ccp
 			case SDLK_d:
 				m_KeysPressed[KEY_D] = false;
 				break;
+
 			}
 		}
 	}

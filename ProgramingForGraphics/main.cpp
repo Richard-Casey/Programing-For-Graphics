@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	Camera* cam = new Camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
 	cam->SetCamPos(vec3(0, 0, -5));
 
-	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.5f, 100.0f);
+	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 	
 	Mesh Tri1(Verticies, 3);
 	
@@ -164,39 +164,43 @@ int main(int argc, char *argv[])
 	
 	while (true)
 	{
+		cam->UpdateLocalAxis();
 		// This moves the camera
 		input->Update();
 
+		if (input->KeyIsPressed(KEY_D))
+		{
+			vec3  pos = cam->M_Transform.GetPos();
+			pos += -cam->m_Right * 0.1f;
+			cam->M_Transform.SetPos(pos);
+		}
+
 		if (input->KeyIsPressed(KEY_W))
 		{
-			vec3  pos = cam->GetCamPos();
-			pos.z += 0.1;
-			cam->SetCamPos(pos);
+			vec3  pos = cam->M_Transform.GetPos();
+			pos += cam->m_Forward * 0.1f;
+			cam->M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_A))
 		{
-			vec3  pos = cam->GetCamPos();
-			pos.x += 0.1;
-			cam->SetCamPos(pos);
+			// Back
+			vec3  pos = cam->M_Transform.GetPos();
+			pos += cam->m_Right * 0.1f;
+			cam->M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_S))
 		{
-			// Back
-			vec3  pos = cam->GetCamPos();
-			pos.z += -0.1;
-			cam->SetCamPos(pos);
-		}
 
-		if (input->KeyIsPressed(KEY_D))
-		{
-
-			vec3  pos = cam->GetCamPos();
-			pos.x += -0.1;
-			cam->SetCamPos(pos);
+			vec3  pos = cam->M_Transform.GetPos();
+			pos += -cam->m_Forward * 0.1f;
+			cam->M_Transform.SetPos(pos);
 
 		}
+
+		cam->MouseMoveTarget();
+
 
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -216,7 +220,7 @@ int main(int argc, char *argv[])
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &Tri1.trans.GetModel()[0][0]);
 
 		GLint ViewLoc = glGetUniformLocation(ShaderPrograme, "view");
-		glUniformMatrix4fv(ViewLoc, 1, GL_FALSE, &cam->getCameraView()[0][0]);
+		glUniformMatrix4fv(ViewLoc, 1, GL_FALSE, &cam->GetViewMatrix()[0][0]);
 
 		GLint perspectivLoc = glGetUniformLocation(ShaderPrograme, "perspective");
 		glUniformMatrix4fv(perspectivLoc, 1, GL_FALSE, &cam->GetPerspective()[0][0]);
