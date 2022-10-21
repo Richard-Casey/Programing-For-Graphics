@@ -199,6 +199,18 @@ int main(int argc, char *argv[])
 
 		}
 
+		
+
+		if (input->KeyIsPressed(KEY_ESCAPE))
+		{
+			printf("QUITTING GAME THINGY");
+			SDL_GL_DeleteContext(GLContext); // All Clean up but in theory should never get here due to infinate loop
+			SDL_DestroyWindow(window);
+			window = NULL;
+			SDL_Quit();
+			return 0;
+		}
+
 		cam->MouseMoveTarget();
 
 

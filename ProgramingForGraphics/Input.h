@@ -15,6 +15,7 @@ public:
 	~Input();
 	bool m_KeysPressed[SIZE_OF_KEYS_PRESSED_ENUM] = {};
 	bool KeyIsPressed(KEYS_PRESSED_LIST key);
+	SDL_Event e;
 	
 };
 

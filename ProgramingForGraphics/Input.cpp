@@ -36,6 +36,7 @@ void Input::Update(void) // Full comments through Game Engine Design input.ccp
 
 			}
 
+
 		}
 
 		else if (m_Event.type == SDL_KEYUP)
@@ -60,6 +61,7 @@ void Input::Update(void) // Full comments through Game Engine Design input.ccp
 			case SDLK_d:
 				m_KeysPressed[KEY_D] = false;
 				break;
+
 
 			}
 		}
