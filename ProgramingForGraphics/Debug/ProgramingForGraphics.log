@@ -1,1 +1,30 @@
-﻿  ProgramingForGraphics.vcxproj -> C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\Debug\ProgramingForGraphics.exe
+﻿  Camera.cpp
+  Input.cpp
+  main.cpp
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\main.cpp(173,16): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\main.cpp(180,16): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\main.cpp(188,17): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\main.cpp(196,17): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\main.cpp(206,24): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+  Generating Code...
+  ProgramingForGraphics.vcxproj -> C:\Users\Administrator\Desktop\s233122\Programing For Graphics\Debug\ProgramingForGraphics.exe
