@@ -2,7 +2,8 @@
 class triangles
 {
 public:
-	void triangle();
+	triangles();
 	void CheckShaderError();
+	~triangles();
 };
 

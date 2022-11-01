@@ -8,6 +8,9 @@
 #include <iostream>
 #include "triangles.h"
 #include "window.h"
+#include "mesh.h"
+#include "Transform.h"
+
 
 using namespace std;
 
@@ -33,7 +36,7 @@ triangles CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const str
 }
 
 
-triangles triangle()
+triangles::triangles()
 {
 
 
@@ -105,8 +108,11 @@ triangles triangle()
 
 		SDL_Delay(16);
 
-		SDL_GL_SwapWindow(window::&windowed);
+		SDL_GL_SwapWindow(window);
 	}
 
+}
 
+triangles::~triangles()
+{
 }

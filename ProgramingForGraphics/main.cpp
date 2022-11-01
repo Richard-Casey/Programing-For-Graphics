@@ -8,6 +8,10 @@
 #include <iostream>
 #include "window.h"
 #include "triangles.h"
+#include "mesh.h"
+#include "Camera.h"
+#include "Input.h"
+#include "Transform.h"
 
 
 using namespace std;
