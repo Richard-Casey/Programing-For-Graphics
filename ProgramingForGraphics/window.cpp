@@ -22,9 +22,14 @@ window createWindow()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16); // Depth is not 32 bit
 
-	SDL_Window* window = SDL_CreateWindow("Lets try this again ...", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-	SDL_GLContext GLContext = SDL_GL_CreateContext(window);
+	SDL_Window* m_window = SDL_CreateWindow(
+		"Lets try this again ...",	// Window title
+		SDL_WINDOWPOS_CENTERED,		// initial x position
+		SDL_WINDOWPOS_CENTERED,		// initial y position
+		800,						// width in pixels
+		600,						// height in pixels
+		SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);	// window behaviour flags
+	SDL_GLContext GLContext = SDL_GL_CreateContext(m_window);
 	
 
 	glewExperimental = GL_TRUE;

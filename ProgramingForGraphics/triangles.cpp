@@ -15,7 +15,7 @@
 using namespace std;
 
 
-triangles CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
+void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
 {
 	GLint success = 0;
 	GLchar error[1024] = { 0 };
@@ -108,7 +108,7 @@ triangles::triangles()
 
 		SDL_Delay(16);
 
-		SDL_GL_SwapWindow(window);
+		SDL_GL_SwapWindow(m_window);
 	}
 
 }

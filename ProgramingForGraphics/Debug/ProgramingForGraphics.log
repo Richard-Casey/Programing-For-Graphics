@@ -1,14 +1,27 @@
 ﻿  main.cpp
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(16,1): error C2011: 'triangles': 'class' type redefinition
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(15): message : see declaration of 'triangles'
   mesh.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(16,1): error C2011: 'triangles': 'class' type redefinition
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(15): message : see declaration of 'triangles'
   triangles.cpp
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.cpp(92,2): error C2660: 'triangles::CheckShaderError': function does not take 4 arguments
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.h(6,7): message : see declaration of 'triangles::CheckShaderError'
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.cpp(96,2): error C2660: 'triangles::CheckShaderError': function does not take 4 arguments
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.h(6,7): message : see declaration of 'triangles::CheckShaderError'
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.cpp(111,21): error C2275: 'window': illegal use of this type as an expression
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(2): message : see declaration of 'window'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(16,1): error C2011: 'triangles': 'class' type redefinition
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(15): message : see declaration of 'triangles'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(39,12): error C2027: use of undefined type 'triangles'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(15): message : see declaration of 'triangles'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(40,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(111,21): error C2065: 'm_window': undeclared identifier
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(114,1): warning C4508: '{ctor}': function should return a value; 'void' return type assumed
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(116,13): error C2027: use of undefined type 'triangles'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(15): message : see declaration of 'triangles'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(117,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(118,1): warning C4508: '{dtor}': function should return a value; 'void' return type assumed
   window.cpp
-C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(16,1): error C2011: 'triangles': 'class' type redefinition
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(15): message : see declaration of 'triangles'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.cpp(52,21): error C2275: 'window': illegal use of this type as an expression
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.h(11): message : see declaration of 'window'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.cpp(56,20): error C2275: 'window': illegal use of this type as an expression
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.h(11): message : see declaration of 'window'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.cpp(57,9): error C2513: 'window': no variable declared before '='
   Generating Code...
