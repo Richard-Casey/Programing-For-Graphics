@@ -1,14 +1,14 @@
 ﻿  main.cpp
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
   mesh.cpp
   triangles.cpp
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(92,2): error C2660: 'triangles::CheckShaderError': function does not take 4 arguments
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(6,7): message : see declaration of 'triangles::CheckShaderError'
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(96,2): error C2660: 'triangles::CheckShaderError': function does not take 4 arguments
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.h(6,7): message : see declaration of 'triangles::CheckShaderError'
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\triangles.cpp(111,21): error C2275: 'window': illegal use of this type as an expression
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.h(2): message : see declaration of 'window'
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.cpp(92,2): error C2660: 'triangles::CheckShaderError': function does not take 4 arguments
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.h(6,7): message : see declaration of 'triangles::CheckShaderError'
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.cpp(96,2): error C2660: 'triangles::CheckShaderError': function does not take 4 arguments
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.h(6,7): message : see declaration of 'triangles::CheckShaderError'
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\triangles.cpp(111,21): error C2275: 'window': illegal use of this type as an expression
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(2): message : see declaration of 'window'
   window.cpp
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
+C:\Users\Administrator\Desktop\s233122\Programing For Graphics\ProgramingForGraphics\window.h(6,22): error C2533: 'window': constructors not allowed a return type
   Generating Code...
