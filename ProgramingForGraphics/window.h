@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SDL.h>
 #include <stdio.h>
 #include <string>
@@ -6,11 +7,14 @@
 #include "Input.h"
 #include "mesh.h"
 #include "Transform.h"
-#include "triangles.h"
+
+using namespace std;
+
+struct SDL_Window;
 
 class window
 {
 public:
+	SDL_Window* m_window;
 	void createWindow();
-	SDL_Window* m_window();
 };

@@ -22,10 +22,9 @@ triangles CheckShaderError();
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	
-	window createWindow();
-
-	triangles triangle();
+	window Window;
+	Window.createWindow();
+	triangles::triangles(Window.m_window);
 
 	return 0;
 }

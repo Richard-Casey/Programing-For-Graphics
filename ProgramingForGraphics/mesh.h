@@ -5,7 +5,6 @@
 #include <glm\glm.hpp>
 #include <glew.h>
 #include "Transform.h"
-#include "triangles.h"
 
 class Mesh
 {

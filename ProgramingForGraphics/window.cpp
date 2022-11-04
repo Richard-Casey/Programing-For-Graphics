@@ -7,11 +7,12 @@
 #include <SDL.h>
 #include <iostream>
 #include "window.h"
-#include "triangles.h"
+
 
 using namespace std;
 
-window createWindow()
+
+void window::createWindow()
 {
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -49,11 +50,11 @@ window createWindow()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, 800, 600);
 
-		SDL_GL_SwapWindow(window);
+		SDL_GL_SwapWindow(m_window);
 	}
 
-	SDL_GL_DeleteContext(GLContext);
-	SDL_DestroyWindow(window);
-	window = NULL;
-	SDL_Quit();
+	/*SDL_GL_DeleteContext(GLContext);
+	SDL_DestroyWindow(m_window);
+	m_window = NULL;
+	SDL_Quit();*/
 }

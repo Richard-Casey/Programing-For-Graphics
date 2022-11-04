@@ -15,8 +15,8 @@ using namespace std;
 class triangles
 {
 public:
-	triangles();
-	void CheckShaderError();
+	triangles(SDL_Window* window);
+	void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage);
 	~triangles();
 };
 
