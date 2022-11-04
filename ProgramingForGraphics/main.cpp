@@ -11,6 +11,8 @@
 #include "main.h"
 #include "Input.h"
 #include "Camera.h"
+#include <vector>
+#include "Vertex.h"
 
 using namespace std;
 #undef main
@@ -64,7 +66,8 @@ int main(int argc, char *argv[])
 		cout << "GLEW failed to initialise!" << endl;
 	}
 	
-	float Verticies[]{
+
+	/*float Verticies[]{
 
 		0.5f, 1.0f, 0.5f,
 		1.0f, 0.0f, 0.5f,
@@ -78,6 +81,18 @@ int main(int argc, char *argv[])
 		0.0f, -1.0f, -0.5f,
 		-1.0f, -1.0f, -0.5f
 
+	};*/
+
+	vector<Vertex> SquareVerticies;
+
+	SquareVerticies.push_back(Vertex(-0.5f, 0.5f, 0));
+	SquareVerticies.push_back(Vertex(0.5f, 0.5f, 0));
+	SquareVerticies.push_back(Vertex(0.5f, -0.5f, 0));
+	SquareVerticies.push_back(Vertex(-0.5f, -0.5f, 0));
+
+	unsigned int SquareIndecies[]
+	{
+		0,1,2,0,2,3
 	};
 
 	Camera* cam = new Camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
@@ -85,9 +100,9 @@ int main(int argc, char *argv[])
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.1f, 100.0f);
 	
-	Mesh Tri1(Verticies, 3);
+	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	
-	GLuint VertexBufferObject = 0;
+	/*GLuint VertexBufferObject = 0;
 	glGenBuffers(1, &VertexBufferObject);
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
 	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float),
@@ -115,7 +130,7 @@ int main(int argc, char *argv[])
 
 	glBindBuffer(GL_ARRAY_BUFFER, VertexArrayObject1);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glBindVertexArray(0);
+	glBindVertexArray(0);*/
 
 	const char* VertexShaderCode =
 		
@@ -156,7 +171,7 @@ int main(int argc, char *argv[])
 	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
 	glViewport(0, 0, 800, 600);
 
-	Tri1.Draw();
+	//Tri1.Draw();
 
 	Tri1.trans.SetPos(vec3 (0, 0, 0));
 	
@@ -216,18 +231,19 @@ int main(int argc, char *argv[])
 
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(ShaderPrograme);
+		
 		
 		vec3 SlowRotate = Tri1.trans.GetRot();
 		SlowRotate[0] += 0.01;
 		Tri1.trans.SetRot(SlowRotate);
-
-		glBindVertexArray(VertexArrayObject);
+		
+		/*glBindVertexArray(VertexArrayObject);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		
 		glUseProgram(ShaderPrograme);
-
+		*/
+		glUseProgram(ShaderPrograme);
 		GLint modelLoc = glGetUniformLocation(ShaderPrograme, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &Tri1.trans.GetModel()[0][0]);
 
@@ -237,8 +253,11 @@ int main(int argc, char *argv[])
 		GLint perspectivLoc = glGetUniformLocation(ShaderPrograme, "perspective");
 		glUniformMatrix4fv(perspectivLoc, 1, GL_FALSE, &cam->GetPerspective()[0][0]);
 
-		glBindVertexArray(VertexArrayObject1);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		/*glBindVertexArray(VertexArrayObject1);
+		glDrawArrays(GL_TRIANGLES, 0, 3);*/
+
+
+		Tri1.Draw();
 
 		SDL_Delay(16);
 

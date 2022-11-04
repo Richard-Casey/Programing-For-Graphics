@@ -5,17 +5,19 @@
 #include <glm\glm.hpp>
 #include <glew.h>
 #include "Transform.h"
+#include "Vertex.h"
 
 class Mesh
 {
 public:
 	Transform trans;
-	Mesh(float* verts, unsigned int vertCount);
+	Mesh(Vertex* verts, unsigned int vertCount, unsigned int *indicies, unsigned int numIndicies);
 	void Draw();
 	~Mesh();
+	int m_drawCount;
 	
 private:
-	GLuint m_vertexBufferObject = 0;
+	GLuint m_vertexBufferObjects[2];
 	GLuint m_vertexArrayObject = 0;
 };
 
