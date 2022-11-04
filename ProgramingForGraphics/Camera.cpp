@@ -23,6 +23,10 @@ void Camera::SetCamPos(vec3 newPos) { c_Position = newPos; }
 void Camera::SetCamRot(vec3 newRot) { c_Rotation = newRot; }
 void Camera::SetCamScale(vec3 newScale) { c_Scale = newScale; }
 
+Camera::~Camera()
+{
+}
+
 
 
 

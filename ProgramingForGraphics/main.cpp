@@ -13,29 +13,32 @@
 #include "Camera.h"
 #include <vector>
 #include "Vertex.h"
+#include "Shader.h"
 
 using namespace std;
 #undef main
 
-void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
-{
-	GLint success = 0;
-	GLchar error[1024] = { 0 };
+//void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
+//{
+//	GLint success = 0;
+//	GLchar error[1024] = { 0 };
+//
+//	if (isProgram)
+//		glGetProgramiv(shader, flag, &success);
+//	else
+//		glGetShaderiv(shader, flag, &success);
+//
+//	if (success == GL_FALSE)
+//	{
+//		if (isProgram)
+//			glGetProgramInfoLog(shader, sizeof(error), NULL, error);
+//		else
+//			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
+//		cerr << errorMessage << "; '" << error << " ' " << endl;
+//	}
+//}
 
-	if (isProgram)
-		glGetProgramiv(shader, flag, &success);
-	else
-		glGetShaderiv(shader, flag, &success);
 
-	if (success == GL_FALSE)
-	{
-		if (isProgram)
-			glGetProgramInfoLog(shader, sizeof(error), NULL, error);
-		else
-			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
-		cerr << errorMessage << "; '" << error << " ' " << endl;
-	}
-}
 
 
 int main(int argc, char *argv[])
@@ -95,12 +98,16 @@ int main(int argc, char *argv[])
 		0,1,2,0,2,3
 	};
 
-	Camera* cam = new Camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
-	cam->SetCamPos(vec3(0, 0, -5));
+	Camera camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
+	camera.SetCamPos(vec3(0, 0,-5));
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.1f, 100.0f);
-	
+	string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
+	Shader* basicShader = new Shader("../resources/Basic", camera);
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
+	
+	
+	
 	
 	/*GLuint VertexBufferObject = 0;
 	glGenBuffers(1, &VertexBufferObject);
@@ -132,25 +139,25 @@ int main(int argc, char *argv[])
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glBindVertexArray(0);*/
 
-	const char* VertexShaderCode =
-		
-		"#version 450\n"
-		"in vec3 vp;"
-		"uniform mat4 model;"
-		"uniform mat4 view;"
-		"uniform mat4 perspective;"
-		"void main() {"
-		"   gl_Position = perspective * view * model * vec4(vp, 1.0);"
-		"}";
+	//const char* VertexShaderCode =
+	//	
+	//	"#version 450\n"
+	//	"in vec3 vp;"
+	//	"uniform mat4 model;"
+	//	"uniform mat4 view;"
+	//	"uniform mat4 perspective;"
+	//	"void main() {"
+	//	"   gl_Position = perspective * view * model * vec4(vp, 1.0);"
+	//	"}";
 
-	const char* FragmentShaderCode =
-		"#version 450\n"
-		"out vec4 frag_colour;"
-		"void main() {"
-		"   frag_colour = vec4(0.0, 0.5, 1.0, 1.0);" // Fill colour in RGBA
-		"}";
+	//const char* FragmentShaderCode =
+	//	"#version 450\n"
+	//	"out vec4 frag_colour;"
+	//	"void main() {"
+	//	"   frag_colour = vec4(0.0, 0.5, 1.0, 1.0);" // Fill colour in RGBA
+	//	"}";
 
-	GLuint VertexShader = glCreateShader(GL_VERTEX_SHADER);
+	/*GLuint VertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(VertexShader, 1, &VertexShaderCode, NULL);
 	glCompileShader(VertexShader);
 	GLuint FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -166,7 +173,7 @@ int main(int argc, char *argv[])
 		"Error: Program linking field: ");
 	glValidateProgram(ShaderPrograme);
 	CheckShaderError(ShaderPrograme, GL_VALIDATE_STATUS, true,
-		"Error; Program is invalid: ");
+		"Error; Program is invalid: ");*/
 
 	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
 	glViewport(0, 0, 800, 600);
@@ -179,38 +186,38 @@ int main(int argc, char *argv[])
 	
 	while (true)
 	{
-		cam->UpdateLocalAxis();
+		camera.UpdateLocalAxis();
 		// This moves the camera
 		input->Update();
 
 		if (input->KeyIsPressed(KEY_D))
 		{
-			vec3  pos = cam->M_Transform.GetPos();
-			pos += -cam->m_Right * 0.1f;
-			cam->M_Transform.SetPos(pos);
+			vec3  pos = camera.M_Transform.GetPos();
+			pos += -camera.m_Right * 0.1f;
+			camera.M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_W))
 		{
-			vec3  pos = cam->M_Transform.GetPos();
-			pos += cam->m_Forward * 0.1f;
-			cam->M_Transform.SetPos(pos);
+			vec3  pos = camera.M_Transform.GetPos();
+			pos += camera.m_Forward * 0.1f;
+			camera.M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_A))
 		{
 			// Back
-			vec3  pos = cam->M_Transform.GetPos();
-			pos += cam->m_Right * 0.1f;
-			cam->M_Transform.SetPos(pos);
+			vec3  pos = camera.M_Transform.GetPos();
+			pos += camera.m_Right * 0.1f;
+			camera.M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_S))
 		{
 
-			vec3  pos = cam->M_Transform.GetPos();
-			pos += -cam->m_Forward * 0.1f;
-			cam->M_Transform.SetPos(pos);
+			vec3  pos = camera.M_Transform.GetPos();
+			pos += -camera.m_Forward * 0.1f;
+			camera.M_Transform.SetPos(pos);
 
 		}
 
@@ -226,7 +233,7 @@ int main(int argc, char *argv[])
 			return 0;
 		}
 
-		cam->MouseMoveTarget();
+		camera.MouseMoveTarget();
 
 
 
@@ -243,7 +250,7 @@ int main(int argc, char *argv[])
 		
 		glUseProgram(ShaderPrograme);
 		*/
-		glUseProgram(ShaderPrograme);
+		/*glUseProgram(ShaderPrograme);
 		GLint modelLoc = glGetUniformLocation(ShaderPrograme, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &Tri1.trans.GetModel()[0][0]);
 
@@ -251,11 +258,13 @@ int main(int argc, char *argv[])
 		glUniformMatrix4fv(ViewLoc, 1, GL_FALSE, &cam->GetViewMatrix()[0][0]);
 
 		GLint perspectivLoc = glGetUniformLocation(ShaderPrograme, "perspective");
-		glUniformMatrix4fv(perspectivLoc, 1, GL_FALSE, &cam->GetPerspective()[0][0]);
+		glUniformMatrix4fv(perspectivLoc, 1, GL_FALSE, &cam->GetPerspective()[0][0]);*/
 
 		/*glBindVertexArray(VertexArrayObject1);
 		glDrawArrays(GL_TRIANGLES, 0, 3);*/
 
+		basicShader->Bind();
+		basicShader->Update(Tri1.trans);
 
 		Tri1.Draw();
 

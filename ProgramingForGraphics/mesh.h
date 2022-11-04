@@ -17,7 +17,14 @@ public:
 	int m_drawCount;
 	
 private:
-	GLuint m_vertexBufferObjects[2];
+
+	enum
+	{
+		POSITION_VB,
+		INDEX_VB,
+		NUM_BUFFERS
+	};	
+	GLuint m_vertexBufferObjects[NUM_BUFFERS];
 	GLuint m_vertexArrayObject = 0;
 };
 
