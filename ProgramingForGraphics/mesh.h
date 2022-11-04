@@ -9,7 +9,7 @@
 class Mesh
 {
 public:
-	//Transform trans;
+	Transform trans;
 	Mesh(float* verts, unsigned int vertCount);
 	void Draw();
 	~Mesh();
