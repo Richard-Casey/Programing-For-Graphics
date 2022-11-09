@@ -1,1 +1,12 @@
-﻿  ProgramingForGraphics.vcxproj -> C:\Users\Administrator\Desktop\s233122\Programing For Graphics\Debug\ProgramingForGraphics.exe
+﻿  Shader.cpp
+  main.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(246,24): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(272,56): error C2228: left of '.GetProgram' must have class/struct/union
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(272,56): message : type is 'Shader *'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(272,56): message : did you intend to use '->' instead?
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(274,32): error C2065: 'textureID': undeclared identifier
+  Generating Code...

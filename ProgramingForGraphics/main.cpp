@@ -1,4 +1,5 @@
 #define GLEW_STATIC
+#define STB_IMAGE_IMPLEMENTATION
 
 #include <glew.h>
 #include <SDL_opengl.h>
@@ -14,6 +15,7 @@
 #include <vector>
 #include "Vertex.h"
 #include "Shader.h"
+#include "stb_image.h"
 
 using namespace std;
 #undef main
@@ -88,10 +90,10 @@ int main(int argc, char *argv[])
 
 	vector<Vertex> SquareVerticies;
 
-	SquareVerticies.push_back(Vertex(-0.5f, 0.5f, 0));
-	SquareVerticies.push_back(Vertex(0.5f, 0.5f, 0));
-	SquareVerticies.push_back(Vertex(0.5f, -0.5f, 0));
-	SquareVerticies.push_back(Vertex(-0.5f, -0.5f, 0));
+	SquareVerticies.push_back(Vertex(vec3(-0.5f, 0.5f, -1.0f), vec2(0, 0))); // Top Left
+	SquareVerticies.push_back(Vertex(vec3(0.5f, 0.5f, -1.0f), vec2(1, 0)));	// Top Right
+	SquareVerticies.push_back(Vertex(vec3(0.5f, -0.5f, -1.0f), vec2(1, 1)));	// Bottom Right
+	SquareVerticies.push_back(Vertex(vec3(-0.5f, -0.5f, -1.0f), vec2(0, 1)));	// Bottom Left
 
 	unsigned int SquareIndecies[]
 	{
@@ -102,7 +104,7 @@ int main(int argc, char *argv[])
 	camera.SetCamPos(vec3(0, 0,-5));
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.1f, 100.0f);
-	string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
+	//string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
 	Shader* basicShader = new Shader("../resources/Basic", camera);
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	
@@ -264,6 +266,14 @@ int main(int argc, char *argv[])
 		glDrawArrays(GL_TRIANGLES, 0, 3);*/
 
 		basicShader->Bind();
+
+		// we only have 32 texture units availible to us. 0 to 31
+		glActiveTexture(GL_TEXTURE);
+		GLuint TextureLoc = glGetUniformLocation(basicShader.GetProgram(), "texture_diffuse");
+		glUniform1i(TextureLoc, 0); // 0 for location 0
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		//basicShader->Update(Tri1.trans);
+
 		basicShader->Update(Tri1.trans);
 
 		Tri1.Draw();
