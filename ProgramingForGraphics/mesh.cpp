@@ -26,8 +26,8 @@ Mesh::Mesh(Vertex* verts, unsigned int vertCount, unsigned int* indices, unsigne
 	//position
 	glEnableVertexAttribArray(POSITION_VB);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObjects[POSITION_VB]);
-	glBufferData(GL_ARRAY_BUFFER, vertCount * sizeof(Vertex),
-		&verts[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertCount * sizeof(positions[0]),
+		&positions[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(POSITION_VB, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
 
 	// Texture Coords

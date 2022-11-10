@@ -1,5 +1,5 @@
 #define GLEW_STATIC
-#define STB_IMAGE_IMPLEMENTATION
+
 
 #include <glew.h>
 #include <SDL_opengl.h>
@@ -14,8 +14,9 @@
 #include "Camera.h"
 #include <vector>
 #include "Vertex.h"
+//#include "stb_image.h"
 #include "Shader.h"
-#include "stb_image.h"
+#include "Texture.h"
 
 using namespace std;
 #undef main
@@ -90,9 +91,9 @@ int main(int argc, char *argv[])
 
 	vector<Vertex> SquareVerticies;
 
-	SquareVerticies.push_back(Vertex(vec3(-0.5f, 0.5f, -1.0f), vec2(0, 0))); // Top Left
-	SquareVerticies.push_back(Vertex(vec3(0.5f, 0.5f, -1.0f), vec2(1, 0)));	// Top Right
-	SquareVerticies.push_back(Vertex(vec3(0.5f, -0.5f, -1.0f), vec2(1, 1)));	// Bottom Right
+	SquareVerticies.push_back(Vertex(vec3(-0.5f, 0.5f, -1.0f), vec2(0, 0)));		// Top Left
+	SquareVerticies.push_back(Vertex(vec3(0.5f, 0.5f, -1.0f), vec2(1, 0)));		// Top Right
+	SquareVerticies.push_back(Vertex(vec3(0.5f, -0.5f, -1.0f), vec2(1, 1)));		// Bottom Right
 	SquareVerticies.push_back(Vertex(vec3(-0.5f, -0.5f, -1.0f), vec2(0, 1)));	// Bottom Left
 
 	unsigned int SquareIndecies[]
@@ -100,12 +101,16 @@ int main(int argc, char *argv[])
 		0,1,2,0,2,3
 	};
 
-	Camera camera(70.0f, 800.0f/600.0f,0.5f,100.0f);
+	Camera camera(70.0f, 800.0f/600.0f, 0.01f, 500.0f);
 	camera.SetCamPos(vec3(0, 0,-5));
 
-	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+	string directoryUni = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources\\";
+
+	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 100.0f);
 	//string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
-	Shader* basicShader = new Shader("../resources/Basic", camera);
+	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
+	Texture* texture = new Texture();
+	texture->LoadTexture(directoryUni + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	
 	
@@ -182,7 +187,7 @@ int main(int argc, char *argv[])
 
 	//Tri1.Draw();
 
-	Tri1.trans.SetPos(vec3 (0, 0, 0));
+	Tri1.trans.SetPos(vec3 (2, 0, 0));
 	
 	Input* input = new Input();
 	
@@ -242,9 +247,9 @@ int main(int argc, char *argv[])
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		
-		vec3 SlowRotate = Tri1.trans.GetRot();
-		SlowRotate[0] += 0.01;
-		Tri1.trans.SetRot(SlowRotate);
+		//vec3 SlowRotate = Tri1.trans.GetRot();
+		//SlowRotate[0] += 0.01;
+		//Tri1.trans.SetRot(SlowRotate);
 		
 		/*glBindVertexArray(VertexArrayObject);
 
@@ -268,13 +273,20 @@ int main(int argc, char *argv[])
 		basicShader->Bind();
 
 		// we only have 32 texture units availible to us. 0 to 31
-		glActiveTexture(GL_TEXTURE);
-		GLuint TextureLoc = glGetUniformLocation(basicShader.GetProgram(), "texture_diffuse");
+		glActiveTexture(GL_TEXTURE0);
+		GLuint TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_diffuse");
 		glUniform1i(TextureLoc, 0); // 0 for location 0
-		glBindTexture(GL_TEXTURE_2D, textureID);
+		glBindTexture(GL_TEXTURE_2D, texture->GetTextureID());
+		basicShader->Update(Tri1.trans);
+
+
+		//glActiveTexture(GL_TEXTURE);
+		//GLuint TextureLoc = glGetUniformLocation(basicShader.GetProgram(), "texture_diffuse");
+		//glUniform1i(TextureLoc, 0); // 0 for location 0
+		//glBindTexture(GL_TEXTURE_2D, textureID);
 		//basicShader->Update(Tri1.trans);
 
-		basicShader->Update(Tri1.trans);
+		//basicShader->Update(Tri1.trans);
 
 		Tri1.Draw();
 

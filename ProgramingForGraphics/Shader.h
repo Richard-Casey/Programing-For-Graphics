@@ -20,6 +20,13 @@ public:
 	static GLuint CreateShader(const string& ShaderSource, GLenum shaderType);
 	static string LoadShader(const string& fileName);
 
+	GLuint GetProgram()
+	{
+		return m_Program;
+	}
+
+	//GLuint textureID;
+
 private:
 	string Name;
 	GLuint m_Program;
