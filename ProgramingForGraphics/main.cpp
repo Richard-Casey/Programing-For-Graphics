@@ -102,11 +102,13 @@ int main(int argc, char *argv[])
 	};
 
 	Camera camera(70.0f, 800.0f/600.0f, 0.01f, 500.0f);
-	camera.SetCamPos(vec3(0, 0,-5));
+	camera.SetCamPos(vec3(0, 0, 0));
+	
 
 	string directoryUni = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources\\";
 
-	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 100.0f);
+	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
+	
 	//string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
 	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
 	Texture* texture = new Texture();
@@ -187,7 +189,8 @@ int main(int argc, char *argv[])
 
 	//Tri1.Draw();
 
-	Tri1.trans.SetPos(vec3 (2, 0, 0));
+	Tri1.trans.SetPos(vec3 (1.0, 0, 0));
+	Tri1.trans.SetRot(vec3(0, 4.73, 0));
 	
 	Input* input = new Input();
 	
@@ -200,14 +203,14 @@ int main(int argc, char *argv[])
 		if (input->KeyIsPressed(KEY_D))
 		{
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += -camera.m_Right * 0.1f;
+			pos += -camera.m_Right * 0.02f;
 			camera.M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_W))
 		{
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += camera.m_Forward * 0.1f;
+			pos += camera.m_Forward * 0.02f;
 			camera.M_Transform.SetPos(pos);
 		}
 
@@ -215,7 +218,7 @@ int main(int argc, char *argv[])
 		{
 			// Back
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += camera.m_Right * 0.1f;
+			pos += camera.m_Right * 0.02f;
 			camera.M_Transform.SetPos(pos);
 		}
 
@@ -223,7 +226,7 @@ int main(int argc, char *argv[])
 		{
 
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += -camera.m_Forward * 0.1f;
+			pos += -camera.m_Forward * 0.02f;
 			camera.M_Transform.SetPos(pos);
 
 		}
@@ -241,6 +244,7 @@ int main(int argc, char *argv[])
 		}
 
 		camera.MouseMoveTarget();
+
 
 
 
