@@ -6,6 +6,8 @@
 #include <glew.h>
 #include "Transform.h"
 #include "Vertex.h"
+#include <SDL.h>
+#include <glm/gtx/normal.hpp>
 
 class Mesh
 {
@@ -23,6 +25,7 @@ private:
 		POSITION_VB,
 		TEXCOORD_VB,
 		INDEX_VB,
+		NORMAL_VB,
 		NUM_BUFFERS
 	};	
 	GLuint m_vertexBufferObjects[NUM_BUFFERS];

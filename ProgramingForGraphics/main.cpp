@@ -108,13 +108,14 @@ int main(int argc, char *argv[])
 	
 
 	string directoryUni = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources\\";
+	string directoryHome = "C:\\Users\\riche\\OneDrive\\Desktop\\s233122\\Programing-For-Graphics\\resources\\";
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 	
 	//string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
-	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
+	Shader* basicShader = new Shader(directoryHome + "Basic", camera);
 	Texture* texture = new Texture();
-	texture->LoadTexture(directoryUni + "Image.jpg");
+	texture->LoadTexture(directoryHome + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	Lightbase* light = new Lightbase();
 	

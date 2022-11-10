@@ -63,7 +63,7 @@ void Camera::MouseMoveTarget()
 		lastX = mouseX;
 		lastY = mouseY;
 
-		GLfloat sensitivity = 0.5;
+		GLfloat sensitivity = 0.3;
 
 		xOffset *= sensitivity;
 		yOffset *= sensitivity;
