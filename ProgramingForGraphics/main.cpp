@@ -1,5 +1,6 @@
 #define GLEW_STATIC
 
+// Complete page 7 of 15 in lights tutorial
 
 #include <glew.h>
 #include <SDL_opengl.h>
@@ -17,6 +18,7 @@
 //#include "stb_image.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Lightbase.h"
 
 using namespace std;
 #undef main
@@ -114,6 +116,9 @@ int main(int argc, char *argv[])
 	Texture* texture = new Texture();
 	texture->LoadTexture(directoryUni + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
+	Lightbase* light = new Lightbase();
+	
+	
 	
 	
 	
@@ -191,6 +196,7 @@ int main(int argc, char *argv[])
 
 	Tri1.trans.SetPos(vec3 (1.0, 0, 0));
 	Tri1.trans.SetRot(vec3(0, 4.73, 0));
+
 	
 	Input* input = new Input();
 	
@@ -274,6 +280,8 @@ int main(int argc, char *argv[])
 		/*glBindVertexArray(VertexArrayObject1);
 		glDrawArrays(GL_TRIANGLES, 0, 3);*/
 
+		light->Draw(&camera);
+
 		basicShader->Bind();
 
 		// we only have 32 texture units availible to us. 0 to 31
@@ -281,7 +289,9 @@ int main(int argc, char *argv[])
 		GLuint TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_diffuse");
 		glUniform1i(TextureLoc, 0); // 0 for location 0
 		glBindTexture(GL_TEXTURE_2D, texture->GetTextureID());
-		basicShader->Update(Tri1.trans);
+		basicShader->Update(Tri1.trans, *light);
+		
+	
 
 
 		//glActiveTexture(GL_TEXTURE);
@@ -293,6 +303,7 @@ int main(int argc, char *argv[])
 		//basicShader->Update(Tri1.trans);
 
 		Tri1.Draw();
+	
 
 		SDL_Delay(16);
 

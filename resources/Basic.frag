@@ -1,6 +1,9 @@
 #version 450
 
 uniform sampler2D texture_diffuse;
+uniform vec3 FragLightColor;
+uniform vec3 FragLightPos;
+uniform vec3 FragCamPos;
 
 in vec2 FragTextureCoord;
 out vec4 frag_colour;

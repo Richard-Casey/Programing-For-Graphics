@@ -4,6 +4,7 @@
 #include <fstream>
 #include "Transform.h"
 #include "Camera.h"
+#include "Lightbase.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ public:
 	Shader(const string FileLocation, Camera& camera);
 	~Shader();
 
-	void Update(Transform& transform);
+	void Update(Transform& transform, Lightbase& light);
 	void Bind();
 
 	static GLuint CreateShader(const string& ShaderSource, GLenum shaderType);
@@ -46,6 +47,9 @@ private:
 		MODEL_U,
 		PROJECTION_U,
 		VIEW_U,
+		FRAG_LIGHTCOLOR_U,
+		FRAG_LIGHTPOS_U,
+		FRAG_CAMERAPOS_U,
 		NUM_UNIFORMS
 	};
 
