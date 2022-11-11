@@ -113,11 +113,13 @@ int main(int argc, char *argv[])
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 	
 	//string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
-	Shader* basicShader = new Shader(directoryHome + "Basic", camera);
+	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
 	Texture* texture = new Texture();
-	texture->LoadTexture(directoryHome + "Image.jpg");
+	texture->LoadTexture(directoryUni + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	Lightbase* light = new Lightbase();
+	GLuint DiffuseTextureID = texture->LoadTexture(directoryUni + "Image.jpg");
+	GLuint NormalTextureID = texture->LoadTexture(directoryUni + "brickwall_normal.jpg");
 	
 	
 	
@@ -281,6 +283,9 @@ int main(int argc, char *argv[])
 		/*glBindVertexArray(VertexArrayObject1);
 		glDrawArrays(GL_TRIANGLES, 0, 3);*/
 
+		static float i;
+		i += 0.01;
+		light->GetTransform().SetPos(vec3(sin(i), 0, 0));
 		light->Draw(&camera);
 
 		basicShader->Bind();
@@ -289,8 +294,13 @@ int main(int argc, char *argv[])
 		glActiveTexture(GL_TEXTURE0);
 		GLuint TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_diffuse");
 		glUniform1i(TextureLoc, 0); // 0 for location 0
-		glBindTexture(GL_TEXTURE_2D, texture->GetTextureID());
+		glBindTexture(GL_TEXTURE_2D, DiffuseTextureID);
 		basicShader->Update(Tri1.trans, *light);
+
+		glActiveTexture(GL_TEXTURE1);
+		TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_normal");
+		glUniform1i(TextureLoc, 1);	// 1 for location 1
+		glBindTexture(GL_TEXTURE_2D, NormalTextureID);
 		
 	
 

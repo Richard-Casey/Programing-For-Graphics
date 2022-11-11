@@ -135,13 +135,14 @@ void Shader::Update(Transform &transform, Lightbase& light)
 		m_Camera->M_Transform.GetPos().y,
 		m_Camera->M_Transform.GetPos().z);
 
-	glUniform3f(m_Uniforms[FRAG_LIGHTPOS_U], m_Camera->M_Transform.GetPos().x,
-		m_Camera->M_Transform.GetPos().y,
-		m_Camera->M_Transform.GetPos().z);
 
-	glUniform3f(m_Uniforms[FRAG_LIGHTCOLOR_U], m_Camera->M_Transform.GetPos().x,
-		m_Camera->M_Transform.GetPos().y,
-		m_Camera->M_Transform.GetPos().z);
+	glUniform3f(m_Uniforms[FRAG_LIGHTPOS_U], light.GetTransform().GetPos().x,
+		light.GetTransform().GetPos().y,
+		light.GetTransform().GetPos().z);
+
+	glUniform3f(m_Uniforms[FRAG_LIGHTCOLOR_U], light.M_Color.x,
+		light.M_Color.y,
+		light.M_Color.z);
 }
 
 Shader::~Shader()

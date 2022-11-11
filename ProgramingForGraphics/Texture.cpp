@@ -2,8 +2,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-void Texture::LoadTexture(string TextureLocation)
+GLuint Texture::LoadTexture(string TextureLocation)
 {
+	GLuint textureID;
 	int width, height, numComponents;
 
 	unsigned char* ImageData = stbi_load(TextureLocation.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
@@ -35,6 +36,8 @@ void Texture::LoadTexture(string TextureLocation)
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	stbi_image_free(ImageData);
+
+	return textureID;
 
 
 }

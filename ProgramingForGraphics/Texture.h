@@ -19,7 +19,7 @@ public:
 	{
 		return textureID;
 	};
-	void LoadTexture(string TextureLocation);
+	GLuint LoadTexture(string TextureLocation);
 private:
 	GLuint textureID;
 

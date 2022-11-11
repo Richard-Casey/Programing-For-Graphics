@@ -7,17 +7,27 @@ struct Vertex
 {
 	vec3 Position;
 	vec2 TextureCoord;
+	vec3 Tangent;
+	vec3 BiTangent;
 
-	Vertex(const float X, const float Y, const float Z)
+	Vertex(const Vertex &vert)
 	{
-		this->Position.x = X;
-		this->Position.y = Y;
-		this->Position.z = Z;
+		this->Position.x = vert.Position.x;
+		this->Position.y = vert.Position.y;
+		this->Position.z = vert.Position.z;
 
-		TextureCoord = { 0,0 };
+		TextureCoord = { vert.TextureCoord.x, vert.TextureCoord.y };
+
+		Tangent = vec3(0);
+		BiTangent = vec3(0);
 
 	}
-
+	Vertex(float x, float y, float z)
+	{
+		this->Position.x = x;
+		this->Position.y = y;
+		this->Position.z = z;
+	}
 	Vertex(const vec3 position) : Vertex(position.x, position.y, position.z)
 	{
 
