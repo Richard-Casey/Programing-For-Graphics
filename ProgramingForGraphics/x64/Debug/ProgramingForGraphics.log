@@ -1,0 +1,19 @@
+﻿  Camera.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Camera.h(5,10): fatal error C1083: Cannot open include file: 'glm\glm.hpp': No such file or directory
+  Input.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Input.h(2,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Lightbase.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Transform.h(5,10): fatal error C1083: Cannot open include file: 'glm\glm.hpp': No such file or directory
+  main.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(5,10): fatal error C1083: Cannot open include file: 'glew.h': No such file or directory
+  mesh.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\mesh.h(5,10): fatal error C1083: Cannot open include file: 'glm\glm.hpp': No such file or directory
+  OBJLoader.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Vertex.h(4,10): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  Shader.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Shader.h(2,10): fatal error C1083: Cannot open include file: 'glew.h': No such file or directory
+  Texture.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Texture.h(3,10): fatal error C1083: Cannot open include file: 'glew.h': No such file or directory
+  Transform.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\Transform.h(5,10): fatal error C1083: Cannot open include file: 'glm\glm.hpp': No such file or directory
+  Generating Code...
