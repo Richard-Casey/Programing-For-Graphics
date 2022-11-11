@@ -35,10 +35,10 @@ float diff = max(dot(normal, lightDir), 0.0);
 vec3 diffuse = diff * FragLightColor;
 
 //Specular
-float specularStrength = 10f;
-//vec3 viewDir = normalize(FragCamPos - FragPos);
-vec3 reflectDir = reflect(-lightDir, normal);
-float spec = pow(max(dot(normal, reflectDir), 0.0), 32.0);
+float specularStrength = 1f;
+vec3 viewDir = normalize( FragPos - FragCamPos);
+vec3 reflectDir = normalize( reflect(-lightDir, normal));
+float spec = pow(max(dot(reflectDir, viewDir ), 0.0), 32.0);
 vec3 specular = vec3(specularStrength * spec);
 
 //vec4 result = vec4(texture2D(texture_diffuse, FragTextureCoord).rgb * (ambient + diffuse + specular), 1);
@@ -49,7 +49,7 @@ vec3 specular = vec3(specularStrength * spec);
 vec4 result = vec4(texture2D(texture_diffuse, FragTextureCoord).rgb * (ambient + diffuse + specular), 1);
 
 
-//vec4 result = vec4(vec3(pow( max(dot(normal, reflectDir), 0.0),32.0)), 1);
+//vec4 result = vec4(specular, 1);
 frag_colour = result;
 
 }
