@@ -7,9 +7,11 @@ struct Vertex
 {
 	vec3 Position;
 	vec2 TextureCoord;
+	vec3 normal;
 	vec3 Tangent;
 	vec3 BiTangent;
-
+	Vertex() {};
+	
 	Vertex(const Vertex &vert)
 	{
 		this->Position.x = vert.Position.x;

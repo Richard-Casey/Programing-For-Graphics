@@ -1,6 +1,6 @@
 #define GLEW_STATIC
 
-// Complete page 7 of 15 in lights tutorial
+// Complete up to Shadow mapping
 
 #include <glew.h>
 #include <SDL_opengl.h>
@@ -19,7 +19,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Lightbase.h"
-
+#include "OBJLoader.h"
 using namespace std;
 #undef main
 
@@ -42,9 +42,6 @@ using namespace std;
 //		cerr << errorMessage << "; '" << error << " ' " << endl;
 //	}
 //}
-
-
-
 
 int main(int argc, char *argv[])
 {
@@ -74,7 +71,6 @@ int main(int argc, char *argv[])
 		cout << "GLEW failed to initialise!" << endl;
 	}
 	
-
 	/*float Verticies[]{
 
 		0.5f, 1.0f, 0.5f,
@@ -118,14 +114,25 @@ int main(int argc, char *argv[])
 	texture->LoadTexture(directoryUni + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	Lightbase* light = new Lightbase();
-	GLuint DiffuseTextureID = texture->LoadTexture(directoryUni + "Image.jpg");
-	GLuint NormalTextureID = texture->LoadTexture(directoryUni + "brickwall_normal.jpg");
-	
-	
-	
-	
-	
-	
+	//GLuint DiffuseTextureID = texture->LoadTexture(directoryUni + "Image.jpg");
+	//GLuint NormalTextureID = texture->LoadTexture(directoryUni + "brickwall_normal.jpg");
+		
+	string AmbiantLoc; // Be aware the following code may need to be moved into its own .h and .ccp
+	string DiffuseLoc;
+	string SpecLoc;
+	string NormalLoc;
+
+	vector <uint> Indecies;
+
+	vector<Vertex> LoadedVerts = OBJLoader::LoadOBJ("../resources", "blocks_01.obj",
+		AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc, Indecies);
+
+	GLuint AmbiantTextureID = texture->LoadTexture("../blocks/" + AmbiantLoc);
+	GLuint DiffuseTextureID = texture->LoadTexture("../blocks/" + DiffuseLoc);
+	GLuint SpeculerTextureID = texture->LoadTexture("../blocks/" + SpecLoc);
+	GLuint NormalTextureID = texture->LoadTexture("../blocks/" + NormalLoc); //End of code that will prob get moved :/
+
+
 	/*GLuint VertexBufferObject = 0;
 	glGenBuffers(1, &VertexBufferObject);
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
@@ -200,9 +207,8 @@ int main(int argc, char *argv[])
 	Tri1.trans.SetPos(vec3 (1.0, 0, 0));
 	Tri1.trans.SetRot(vec3(0, 4.73, 0));
 
-	
 	Input* input = new Input();
-	
+
 	while (true)
 	{
 		camera.UpdateLocalAxis();
@@ -240,8 +246,6 @@ int main(int argc, char *argv[])
 
 		}
 
-		
-
 		if (input->KeyIsPressed(KEY_ESCAPE))
 		{
 			printf("QUITTING GAME THINGY");
@@ -253,9 +257,6 @@ int main(int argc, char *argv[])
 		}
 
 		camera.MouseMoveTarget();
-
-
-
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
@@ -301,10 +302,7 @@ int main(int argc, char *argv[])
 		TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_normal");
 		glUniform1i(TextureLoc, 1);	// 1 for location 1
 		glBindTexture(GL_TEXTURE_2D, NormalTextureID);
-		
-	
-
-
+				
 		//glActiveTexture(GL_TEXTURE);
 		//GLuint TextureLoc = glGetUniformLocation(basicShader.GetProgram(), "texture_diffuse");
 		//glUniform1i(TextureLoc, 0); // 0 for location 0
@@ -337,12 +335,12 @@ int main(int argc, char *argv[])
 		SDL_GL_SwapWindow(window);
 		SDL_Delay (500);
 
-		glClearColor(0.75f, 0.0f, 0.0f, 1.0f);
+		/*glClearColor(0.75f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, 800, 600);
 
 		SDL_GL_SwapWindow(window);
-		SDL_Delay(500);
+		SDL_Delay(500);*/
 	}
 
 	SDL_GL_DeleteContext(GLContext);
