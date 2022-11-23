@@ -1,5 +1,5 @@
 ﻿  main.cpp
-C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(290,12): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(294,12): warning C4305: '+=': truncation from 'double' to 'float'
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4217: symbol '___glewUseProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'Lightbase.obj' in function '"public: void __thiscall Lightbase::Draw(class Camera *)" (?Draw@Lightbase@@QAEXPAVCamera@@@Z)'
 LINK : warning LNK4286: symbol '___glewUseProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'Shader.obj'

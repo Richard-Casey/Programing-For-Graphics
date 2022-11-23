@@ -138,15 +138,15 @@ vector<Vertex> OBJLoader::LoadOBJ(const string& FolderLocation, const string& Fi
 
 					vertsInFace[0].Position = VertPositions[TmpPosition[0] - 1];
 					vertsInFace[0].TextureCoord = VertTextureCoords[TmpTexCoords[0] - 1];
-					vertsInFace[0].normal = VertNormals[TmpNormals[1] - 1];
+					vertsInFace[0].normal = VertNormals[TmpNormals[0] - 1];
 
-					vertsInFace[1].Position = VertPositions[TmpPosition[0] - 1];
-					vertsInFace[1].TextureCoord = VertTextureCoords[TmpTexCoords[0] - 1];
+					vertsInFace[1].Position = VertPositions[TmpPosition[1] - 1];
+					vertsInFace[1].TextureCoord = VertTextureCoords[TmpTexCoords[1] - 1];
 					vertsInFace[1].normal = VertNormals[TmpNormals[1] - 1];
 
-					vertsInFace[2].Position = VertPositions[TmpPosition[0] - 1];
-					vertsInFace[2].TextureCoord = VertTextureCoords[TmpTexCoords[0] - 1];
-					vertsInFace[2].normal = VertNormals[TmpNormals[1] - 1];
+					vertsInFace[2].Position = VertPositions[TmpPosition[2] - 1];
+					vertsInFace[2].TextureCoord = VertTextureCoords[TmpTexCoords[2] - 1];
+					vertsInFace[2].normal = VertNormals[TmpNormals[2] - 1];
 
 					FinalVerts.push_back(vertsInFace[0]);
 					FinalVerts.push_back(vertsInFace[1]);

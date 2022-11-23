@@ -58,12 +58,7 @@ Mesh::Mesh(Vertex* verts, unsigned int vertCount, unsigned int* indices, unsigne
 	glBufferData(GL_ARRAY_BUFFER, vertCount * sizeof(texCoords[0]),
 		&texCoords[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(TEXCOORD_VB, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-	//index
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexBufferObjects[INDEX_VB]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(unsigned int),
-		indices, GL_STATIC_DRAW);
-
+		
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObjects[NORMAL_VB]);
 	glBufferData(GL_ARRAY_BUFFER, vertCount * sizeof(Normals[0]),
 		&Normals[0], GL_STATIC_DRAW);
@@ -81,6 +76,11 @@ Mesh::Mesh(Vertex* verts, unsigned int vertCount, unsigned int* indices, unsigne
 		&BiTangents[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(BITANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(BITANGENT_VB);
+
+	//index
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexBufferObjects[INDEX_VB]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(unsigned int),
+		indices, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 

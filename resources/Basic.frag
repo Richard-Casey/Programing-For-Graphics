@@ -2,6 +2,7 @@
 
 uniform sampler2D texture_diffuse;
 uniform sampler2D texture_normal;
+uniform sampler2D texture_spec;
 uniform vec3 FragLightColor;
 uniform vec3 FragLightPos;
 uniform vec3 FragCamPos;
@@ -35,11 +36,11 @@ float diff = max(dot(normal, lightDir), 0.0);
 vec3 diffuse = diff * FragLightColor;
 
 //Specular
-float specularStrength = 1f;
+float specularStrength = 10f;
 vec3 viewDir = normalize( FragPos - FragCamPos);
 vec3 reflectDir = normalize( reflect(-lightDir, normal));
-float spec = pow(max(dot(reflectDir, viewDir ), 0.0), 32.0);
-vec3 specular = vec3(specularStrength * spec);
+float spec = pow(max(dot(reflectDir, viewDir ), 0.0), 128.0);
+vec3 specular = vec3(specularStrength * spec)*texture2D(texture_spec, FragTextureCoord). rgb;
 
 //vec4 result = vec4(texture2D(texture_diffuse, FragTextureCoord).rgb * (ambient + diffuse + specular), 1);
 //vec4 result = vec4(ambient,1);// + diffuse + specular), 1);

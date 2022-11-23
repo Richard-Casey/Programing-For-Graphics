@@ -128,12 +128,16 @@ int main(int argc, char* argv[])
 	vector<Vertex> LoadedVerts = OBJLoader::LoadOBJ("../resources", "blocks_01.obj",
 		AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc, Indecies);
 
-	GLuint AmbiantTextureID = texture->LoadTexture("../blocks/" + AmbiantLoc);
-	GLuint DiffuseTextureID = texture->LoadTexture("../blocks/" + DiffuseLoc);
-	GLuint SpeculerTextureID = texture->LoadTexture("../blocks/" + SpecLoc);
-	GLuint NormalTextureID = texture->LoadTexture("../blocks/" + NormalLoc); //End of code that will prob get moved :/
+	GLuint AmbiantTextureID = texture->LoadTexture("../resources/" + AmbiantLoc);
+	GLuint DiffuseTextureID = texture->LoadTexture("../resources/" + DiffuseLoc);
+	GLuint SpeculerTextureID = texture->LoadTexture("../resources/" + SpecLoc);
+	GLuint NormalTextureID = texture->LoadTexture("../resources/" + NormalLoc); //End of code that will prob get moved :/
 
 	Mesh Cube(&LoadedVerts[0], LoadedVerts.size(), &Indecies[0], Indecies.size());
+
+	Cube.trans.SetScale(Cube.trans.GetScale() * 0.1f);
+	Cube.trans.SetPos(vec3(0, -1, 5));
+	
 
 	/*GLuint VertexBufferObject = 0;
 	glGenBuffers(1, &VertexBufferObject);
@@ -305,6 +309,11 @@ int main(int argc, char* argv[])
 		glUniform1i(TextureLoc, 1);	// 1 for location 1
 		glBindTexture(GL_TEXTURE_2D, NormalTextureID);
 
+		glActiveTexture(GL_TEXTURE2);
+		TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_spec");
+		glUniform1i(TextureLoc, 2);	// 2 for location 2
+		glBindTexture(GL_TEXTURE_2D, SpeculerTextureID);
+
 		//glActiveTexture(GL_TEXTURE);
 		//GLuint TextureLoc = glGetUniformLocation(basicShader.GetProgram(), "texture_diffuse");
 		//glUniform1i(TextureLoc, 0); // 0 for location 0
@@ -315,11 +324,14 @@ int main(int argc, char* argv[])
 
 		Tri1.Draw();
 
+		basicShader->Update(Cube.trans, *light);
 		Cube.Draw();
 
+		SDL_GL_SwapWindow(window);
+		
 		SDL_Delay(16);
 
-		SDL_GL_SwapWindow(window);
+		
 
 	}
 
