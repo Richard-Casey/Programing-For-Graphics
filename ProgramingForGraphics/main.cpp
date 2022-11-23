@@ -43,7 +43,7 @@ using namespace std;
 //	}
 //}
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 	{
 		cout << "GLEW failed to initialise!" << endl;
 	}
-	
+
 	/*float Verticies[]{
 
 		0.5f, 1.0f, 0.5f,
@@ -99,24 +99,25 @@ int main(int argc, char *argv[])
 		0,1,2,0,2,3
 	};
 
-	Camera camera(70.0f, 800.0f/600.0f, 0.01f, 500.0f);
+	Camera camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 	camera.SetCamPos(vec3(0, 0, 0));
-	
+
 
 	string directoryUni = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources\\";
 	string directoryHome = "C:\\Users\\riche\\OneDrive\\Desktop\\s233122\\Programing-For-Graphics\\resources\\";
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
-	
+
 	//string FileLoc = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources";
-	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
+	Shader* basicShader = new Shader(directoryHome + "Basic", camera);
 	Texture* texture = new Texture();
-	texture->LoadTexture(directoryUni + "Image.jpg");
+	texture->LoadTexture(directoryHome + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	Lightbase* light = new Lightbase();
 	//GLuint DiffuseTextureID = texture->LoadTexture(directoryUni + "Image.jpg");
 	//GLuint NormalTextureID = texture->LoadTexture(directoryUni + "brickwall_normal.jpg");
-		
+
+
 	string AmbiantLoc; // Be aware the following code may need to be moved into its own .h and .ccp
 	string DiffuseLoc;
 	string SpecLoc;
@@ -132,6 +133,7 @@ int main(int argc, char *argv[])
 	GLuint SpeculerTextureID = texture->LoadTexture("../blocks/" + SpecLoc);
 	GLuint NormalTextureID = texture->LoadTexture("../blocks/" + NormalLoc); //End of code that will prob get moved :/
 
+	Mesh Cube(&LoadedVerts[0], LoadedVerts.size(), &Indecies[0], Indecies.size());
 
 	/*GLuint VertexBufferObject = 0;
 	glGenBuffers(1, &VertexBufferObject);
@@ -204,7 +206,7 @@ int main(int argc, char *argv[])
 
 	//Tri1.Draw();
 
-	Tri1.trans.SetPos(vec3 (1.0, 0, 0));
+	Tri1.trans.SetPos(vec3(1.0, 0, 0));
 	Tri1.trans.SetRot(vec3(0, 4.73, 0));
 
 	Input* input = new Input();
@@ -259,16 +261,16 @@ int main(int argc, char *argv[])
 		camera.MouseMoveTarget();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		
+
+
 		//vec3 SlowRotate = Tri1.trans.GetRot();
 		//SlowRotate[0] += 0.01;
 		//Tri1.trans.SetRot(SlowRotate);
-		
+
 		/*glBindVertexArray(VertexArrayObject);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
-		
+
 		glUseProgram(ShaderPrograme);
 		*/
 		/*glUseProgram(ShaderPrograme);
@@ -302,7 +304,7 @@ int main(int argc, char *argv[])
 		TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_normal");
 		glUniform1i(TextureLoc, 1);	// 1 for location 1
 		glBindTexture(GL_TEXTURE_2D, NormalTextureID);
-				
+
 		//glActiveTexture(GL_TEXTURE);
 		//GLuint TextureLoc = glGetUniformLocation(basicShader.GetProgram(), "texture_diffuse");
 		//glUniform1i(TextureLoc, 0); // 0 for location 0
@@ -312,12 +314,13 @@ int main(int argc, char *argv[])
 		//basicShader->Update(Tri1.trans);
 
 		Tri1.Draw();
-	
+
+		Cube.Draw();
 
 		SDL_Delay(16);
 
 		SDL_GL_SwapWindow(window);
-		
+
 	}
 
 	SDL_GL_DeleteContext(GLContext); // All Clean up but in theory should never get here due to infinate loop
@@ -333,9 +336,9 @@ int main(int argc, char *argv[])
 		glViewport(0, 0, 800, 600);
 
 		SDL_GL_SwapWindow(window);
-		SDL_Delay (500);
+		SDL_Delay(500);
 
-		/*glClearColor(0.75f, 0.0f, 0.0f, 1.0f);
+		/*glClearColor(0.75f, 0.0f, 0.0f, 1.0f);w
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, 800, 600);
 
@@ -351,5 +354,5 @@ int main(int argc, char *argv[])
 
 	return 0;
 
-	
+
 }

@@ -167,7 +167,7 @@ vector<Vertex> OBJLoader::LoadOBJ(const string& FolderLocation, const string& Fi
 	}
 	else
 	{
-		cerr << "Unablle to load text file: " << FolderLocation + "/" + FileLoc << endl;
+		cerr << "Unable to load text file: " << FolderLocation + "/" + FileLoc << endl;
 	}
 	file.close();
 	return FinalVerts;
