@@ -11,7 +11,6 @@
 class Camera
 {
 public:
-	//Transform transCamera;
 	Camera(float fov, float aspect, float zNear, float zFar, const vec3& pos = vec3(),
 		const vec3& rot = vec3(),
 		const vec3& scale = vec3()) :
@@ -40,11 +39,8 @@ public:
 
 	void UpdateLocalAxis()
 	{
-		//m_Forward = normalize(vec3(0) - M_Transform.GetPos());// c_Position);
 		m_Right = normalize(cross(vec3(0, 1, 0), m_Forward));
 		m_Up = cross(m_Forward, m_Right);
-
-		//return glm::lookAt(c_Position, vec3(LookingAt += m_Forward), m_Up);
 
 	}
 
