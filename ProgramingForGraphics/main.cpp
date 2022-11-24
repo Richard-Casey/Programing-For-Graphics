@@ -93,6 +93,11 @@ int main(int argc, char* argv[])
 
 	Mesh Cube(&LoadedVerts[0], LoadedVerts.size(), &Indecies[0], Indecies.size());
 
+	Mesh Square1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
+	Square1.trans.SetScale(Square1.trans.GetScale() * 50.0f);
+	Square1.trans.SetRot(vec3(radians(90.0f), 0.0f, 0.0f));
+	Square1.trans.SetPos(vec3(0, -1.0, 0));
+
 	Cube.trans.SetScale(Cube.trans.GetScale() * 0.06f);
 	Cube.trans.SetPos(vec3(0, -1, 3));
 	
@@ -114,21 +119,21 @@ int main(int argc, char* argv[])
 		if (input->KeyIsPressed(KEY_D))
 		{
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += -camera.m_Right * 0.03f;
+			pos += -camera.m_Right * 0.04f;
 			camera.M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_W))
 		{
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += camera.m_Forward * 0.03f;
+			pos += camera.m_Forward * 0.04f;
 			camera.M_Transform.SetPos(pos);
 		}
 
 		if (input->KeyIsPressed(KEY_A))
 		{
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += camera.m_Right * 0.03f;
+			pos += camera.m_Right * 0.04f;
 			camera.M_Transform.SetPos(pos);
 		}
 
@@ -136,7 +141,7 @@ int main(int argc, char* argv[])
 		{
 
 			vec3  pos = camera.M_Transform.GetPos();
-			pos += -camera.m_Forward * 0.03f;
+			pos += -camera.m_Forward * 0.04f;
 			camera.M_Transform.SetPos(pos);
 
 		}
@@ -181,7 +186,10 @@ int main(int argc, char* argv[])
 
 		Tri1.Draw();
 
+		Square1.Draw();
+
 		basicShader->Update(Cube.trans, *light);
+
 		Cube.Draw();
 
 		SDL_GL_SwapWindow(window);
