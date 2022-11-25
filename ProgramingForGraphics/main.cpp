@@ -17,6 +17,9 @@
 #include "Texture.h"
 #include "Lightbase.h"
 #include "OBJLoader.h"
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_opengl3.h"
+#include "Imgui/imgui_impl_sdl.h"
 using namespace std;
 #undef main
 
@@ -24,6 +27,9 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	
+	
+
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -37,6 +43,14 @@ int main(int argc, char* argv[])
 	SDL_Window* window = SDL_CreateWindow("My Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	SDL_GLContext GLContext = SDL_GL_CreateContext(window);
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplSDL2_InitForOpenGL(window, GLContext);
+	ImGui_ImplOpenGL3_Init();
 
 	glewExperimental = GL_TRUE;
 	GLenum status = glewInit();
@@ -70,9 +84,9 @@ int main(int argc, char* argv[])
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 
-	Shader* basicShader = new Shader(directoryHome + "Basic", camera);
+	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
 	Texture* texture = new Texture();
-	texture->LoadTexture(directoryHome + "Image.jpg");
+	texture->LoadTexture(directoryUni + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	Lightbase* light = new Lightbase();
 
@@ -100,8 +114,11 @@ int main(int argc, char* argv[])
 
 	Cube.trans.SetScale(Cube.trans.GetScale() * 0.06f);
 	Cube.trans.SetPos(vec3(0, -1, 3));
+
+	float br=0.1f, bg=0.1f, bb=0.1f;
 	
-	glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
+
+	glClearColor(br, bg, bb, 1.0f);
 	glViewport(0, 0, 800, 600);
 		
 	Tri1.trans.SetPos(vec3(1.0, 0, 0));
@@ -109,8 +126,11 @@ int main(int argc, char* argv[])
 
 	Input* input = new Input();
 
+	float lightScaler = 1;
+
 	while (true)
 	{
+		glClearColor(br, bg, bb, 1.0f);
 		camera.UpdateLocalAxis();
 		// This moves the camera
 
@@ -155,14 +175,37 @@ int main(int argc, char* argv[])
 			SDL_Quit();
 			return 0;
 		}
+		
+		
+
+		// Start the Dear ImGui frame
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplSDL2_NewFrame(window);
+		ImGui::NewFrame();
+		ImGui::SetWindowSize(ImVec2(400, 200));
+		ImGui::Begin("MyWindow");
+		//Code Go here plz
+		if (ImGui::Button("Move Cube")) {
+			Cube.trans.SetPos(camera.M_Transform.GetPos());
+		}
+		ImGui::DragFloat("Red", &br, 0.01f, 0, 1);
+		ImGui::DragFloat("Green", &bg, 0.01f, 0, 1);
+		ImGui::DragFloat("Blue", &bb, 0.01f, 0, 1);
+		ImGui::DragFloat("Light Speed", &lightScaler, 0.01f, 0.5f, 10.0f);
+		printf("%f", br);
+		printf("%f", bg);
+		printf("%f", bb);
+		ImGui::End();
 
 		camera.MouseMoveTarget();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		
+
 		static float i;
 		i += 0.01;
-		light->GetTransform().SetPos(vec3(sin(i), 0, 0));
+		light->GetTransform().SetPos(vec3(sin(i)* lightScaler, 0, 0));
 		light->Draw(&camera);
 
 		basicShader->Bind();
@@ -192,6 +235,9 @@ int main(int argc, char* argv[])
 
 		Cube.Draw();
 
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 		SDL_GL_SwapWindow(window);
 		
 		SDL_Delay(16);
@@ -200,6 +246,9 @@ int main(int argc, char* argv[])
 
 	SDL_GL_DeleteContext(GLContext); // All Clean up but in theory should never get here due to infinate loop
 	SDL_DestroyWindow(window);
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
 	window = NULL;
 	SDL_Quit();
 	return 0;
