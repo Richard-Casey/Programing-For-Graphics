@@ -43,6 +43,8 @@ int main(int argc, char* argv[])
 	SDL_Window* window = SDL_CreateWindow("My Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 	SDL_GLContext GLContext = SDL_GL_CreateContext(window);
+
+	// Initialise ImGui
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -79,14 +81,13 @@ int main(int argc, char* argv[])
 	camera.SetCamPos(vec3(0, 0, 0));
 
 
-	string directoryUni = "C:\\Users\\Administrator\\Desktop\\s233122\\Programing For Graphics\\resources\\";
-	string directoryHome = "C:\\Users\\riche\\OneDrive\\Desktop\\s233122\\Programing-For-Graphics\\resources\\";
+	string directory = "../resources/";
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 
-	Shader* basicShader = new Shader(directoryUni + "Basic", camera);
+	Shader* basicShader = new Shader(directory + "Basic", camera);
 	Texture* texture = new Texture();
-	texture->LoadTexture(directoryUni + "Image.jpg");
+	texture->LoadTexture(directory + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
 	Lightbase* light = new Lightbase();
 
@@ -184,7 +185,7 @@ int main(int argc, char* argv[])
 		ImGui::NewFrame();
 		ImGui::SetWindowSize(ImVec2(400, 200));
 		ImGui::Begin("MyWindow");
-		//Code Go here plz
+		//Code Go here for ImGui (Anything between Begn and End will display in GUI)
 		if (ImGui::Button("Move Cube")) {
 			Cube.trans.SetPos(camera.M_Transform.GetPos());
 		}
@@ -192,6 +193,7 @@ int main(int argc, char* argv[])
 		ImGui::DragFloat("Green", &bg, 0.01f, 0, 1);
 		ImGui::DragFloat("Blue", &bb, 0.01f, 0, 1);
 		ImGui::DragFloat("Light Speed", &lightScaler, 0.01f, 0.5f, 10.0f);
+		
 		printf("%f", br);
 		printf("%f", bg);
 		printf("%f", bb);
