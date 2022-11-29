@@ -5,6 +5,8 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "Lightbase.h"
+#include <vector>
+#include "Texture.h"
 
 using namespace std;
 
@@ -12,10 +14,10 @@ using namespace std;
 class Shader
 {
 public:
-	Shader(const string FileLocation, Camera& camera);
+	Shader(const string FileLocation, Camera& camera, string& AmbiantLoc, string& DiffuseLoc, string& SpecLoc, string& NormalLoc);
 	~Shader();
 
-	void Update(Transform& transform, Lightbase& light);
+	void Update(Transform& transform, vector <Lightbase*> lights);
 	void Bind();
 
 	static GLuint CreateShader(const string& ShaderSource, GLenum shaderType);
@@ -25,6 +27,11 @@ public:
 	{
 		return m_Program;
 	}
+
+	GLuint AmbiantTextureID;
+	GLuint DiffuseTextureID;
+	GLuint SpeculerTextureID;
+	GLuint NormalTextureID;
 
 	//GLuint textureID;
 
@@ -55,7 +62,10 @@ private:
 
 	GLuint m_Uniforms[NUM_UNIFORMS];
 
-	
+	string AmbiantLoc; // Be aware the following code may need to be moved into its own .h and .ccp
+	string DiffuseLoc;
+	string SpecLoc;
+	string NormalLoc;
 
 };
 

@@ -85,26 +85,35 @@ int main(int argc, char* argv[])
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 
-	Shader* basicShader = new Shader(directory + "Basic", camera);
-	Texture* texture = new Texture();
-	texture->LoadTexture(directory + "Image.jpg");
-	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
-	Lightbase* light = new Lightbase();
-
-	string AmbiantLoc; // Be aware the following code may need to be moved into its own .h and .ccp
+	string AmbiantLoc; 
 	string DiffuseLoc;
 	string SpecLoc;
 	string NormalLoc;
+
+	Shader* basicShader = new Shader(directory + "Basic", camera, AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc);
+	Texture* texture = new Texture();
+	//texture->LoadTexture(directory + "Image.jpg");
+	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
+
+	vector <Lightbase*> lights;
+	lights.push_back(new Lightbase());
+	lights.push_back(new Lightbase());
+	lights[0]->GetTransform().SetPos(vec3(1.0, 0.5, 1.0));// Setting first light position
+	lights[1]->GetTransform().SetPos(vec3(-1.0, -0.5, -1.0)); // Setting second light position
+
+	//Lightbase* light = new Lightbase();
+
+
 
 	vector <uint> Indecies;
 
 	vector<Vertex> LoadedVerts = OBJLoader::LoadOBJ("../resources", "blocks_01.obj",
 		AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc, Indecies);
 
-	GLuint AmbiantTextureID = texture->LoadTexture("../resources/" + AmbiantLoc);
-	GLuint DiffuseTextureID = texture->LoadTexture("../resources/" + DiffuseLoc);
-	GLuint SpeculerTextureID = texture->LoadTexture("../resources/" + SpecLoc);
-	GLuint NormalTextureID = texture->LoadTexture("../resources/" + NormalLoc); //End of code that will prob get moved :/
+	//GLuint AmbiantTextureID = texture->LoadTexture("../resources/" + AmbiantLoc);
+	//GLuint DiffuseTextureID = texture->LoadTexture("../resources/" + DiffuseLoc);
+	//GLuint SpeculerTextureID = texture->LoadTexture("../resources/" + SpecLoc);
+	//GLuint NormalTextureID = texture->LoadTexture("../resources/" + NormalLoc); //End of code that will prob get moved :/
 
 	Mesh Cube(&LoadedVerts[0], LoadedVerts.size(), &Indecies[0], Indecies.size());
 
@@ -204,33 +213,37 @@ int main(int argc, char* argv[])
 
 		static float i;
 		i += 0.01;
-		light->GetTransform().SetPos(vec3(sin(i)* lightScaler, 0, 0));
-		light->Draw(&camera);
+		for (int i = 0; i < lights.size(); i++)
+		{
+			lights[i]->Draw(&camera);
+		}
+		//light->GetTransform().SetPos(vec3(sin(i)* lightScaler, 0, 0));
+		
 
 		basicShader->Bind();
 
-		// we only have 32 texture units availible to us. 0 to 31
-		glActiveTexture(GL_TEXTURE0);
-		GLuint TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_diffuse");
-		glUniform1i(TextureLoc, 0); // 0 for location 0
-		glBindTexture(GL_TEXTURE_2D, DiffuseTextureID);
-		basicShader->Update(Tri1.trans, *light);
+		//// we only have 32 texture units availible to us. 0 to 31
+		//glActiveTexture(GL_TEXTURE0);
+		//GLuint TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_diffuse");
+		//glUniform1i(TextureLoc, 0); // 0 for location 0
+		//glBindTexture(GL_TEXTURE_2D, DiffuseTextureID);
+		//basicShader->Update(Tri1.trans, lights);
 
-		glActiveTexture(GL_TEXTURE1);
-		TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_normal");
-		glUniform1i(TextureLoc, 1);	// 1 for location 1
-		glBindTexture(GL_TEXTURE_2D, NormalTextureID);
+		//glActiveTexture(GL_TEXTURE1);
+		//TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_normal");
+		//glUniform1i(TextureLoc, 1);	// 1 for location 1
+		//glBindTexture(GL_TEXTURE_2D, NormalTextureID);
 
-		glActiveTexture(GL_TEXTURE2);
-		TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_spec");
-		glUniform1i(TextureLoc, 2);	// 2 for location 2
-		glBindTexture(GL_TEXTURE_2D, SpeculerTextureID);
+		//glActiveTexture(GL_TEXTURE2);
+		//TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_spec");
+		//glUniform1i(TextureLoc, 2);	// 2 for location 2
+		//glBindTexture(GL_TEXTURE_2D, SpeculerTextureID);
 
 		Tri1.Draw();
 
 		Square1.Draw();
 
-		basicShader->Update(Cube.trans, *light);
+		basicShader->Update(Cube.trans, lights);
 
 		Cube.Draw();
 

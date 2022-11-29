@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 
+
 using namespace std;
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
@@ -27,7 +28,7 @@ static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const s
 }
 
 
-Shader::Shader(const string FileLocation, Camera &camera)
+Shader::Shader(const string FileLocation, Camera& camera, string& AmbiantLoc, string& DiffuseLoc, string& SpecLoc, string& NormalLoc)
 {
 	m_Camera = &camera;
 	Name = FileLocation;
@@ -47,13 +48,15 @@ Shader::Shader(const string FileLocation, Camera &camera)
 	glValidateProgram(m_Program);
 	CheckShaderError(m_Program, GL_VALIDATE_STATUS, true, "Error: Program linking invalid: ");
 
-	m_Uniforms[MODEL_U] =		glGetUniformLocation(m_Program, "model");
-	m_Uniforms[PROJECTION_U] =	glGetUniformLocation(m_Program, "projection");
-	m_Uniforms[VIEW_U] =		glGetUniformLocation(m_Program, "view");
+	m_Uniforms[MODEL_U] = glGetUniformLocation(m_Program, "model");
+	m_Uniforms[PROJECTION_U] = glGetUniformLocation(m_Program, "projection");
+	m_Uniforms[VIEW_U] = glGetUniformLocation(m_Program, "view");
 
 	m_Uniforms[FRAG_CAMERAPOS_U] = glGetUniformLocation(m_Program, "FragCamPos");
 	m_Uniforms[FRAG_LIGHTCOLOR_U] = glGetUniformLocation(m_Program, "FragLightColor");
 	m_Uniforms[FRAG_LIGHTPOS_U] = glGetUniformLocation(m_Program, "FragLightPos");
+
+
 
 	for (GLuint i = 0; i < NUM_UNIFORMS; i++)
 	{
@@ -61,6 +64,21 @@ Shader::Shader(const string FileLocation, Camera &camera)
 			cout << "Shader " << Name << " Uniform invalid index:" << static_cast<UniformNames>(i)
 			<< " (Might be optimized out if not used)" << endl;
 	}
+
+	string directory = "../resources/";
+
+	this->AmbiantLoc = AmbiantLoc;
+	this->DiffuseLoc = DiffuseLoc;
+	this->SpecLoc = SpecLoc;
+	this->NormalLoc = NormalLoc;
+
+	Texture* texture = new Texture();
+	texture->LoadTexture(directory + "Image.jpg");
+
+	AmbiantTextureID = texture->LoadTexture("../resources/" + this->AmbiantLoc);
+	DiffuseTextureID = texture->LoadTexture("../resources/" + this->DiffuseLoc);
+	SpeculerTextureID = texture->LoadTexture("../resources/" + this->SpecLoc);
+	NormalTextureID = texture->LoadTexture("../resources/" + this->NormalLoc);
 
 }
 
@@ -115,7 +133,7 @@ void Shader::Bind()
 	glUseProgram(m_Program);
 }
 
-void Shader::Update(Transform &transform, Lightbase& light)
+void Shader::Update(Transform &transform, vector <Lightbase*> lights)
 {
 	mat4 projection = m_Camera->GetPerspective();
 	mat4 view = m_Camera->GetViewMatrix();
@@ -129,14 +147,27 @@ void Shader::Update(Transform &transform, Lightbase& light)
 		m_Camera->M_Transform.GetPos().y,
 		m_Camera->M_Transform.GetPos().z);
 
+	glActiveTexture(GL_TEXTURE0);
+	GLuint TextureLoc = glGetUniformLocation(GetProgram(), "texture_diffuse");
+	glUniform1i(TextureLoc, 0); // number is location 0
+	glBindTexture(GL_TEXTURE_2D, DiffuseTextureID);
+	glActiveTexture(GL_TEXTURE1);
+	TextureLoc = glGetUniformLocation(GetProgram(), "texture_normal");
+	glUniform1i(TextureLoc, 1); // number is location 1
+	glBindTexture(GL_TEXTURE_2D, NormalTextureID);
+	glActiveTexture(GL_TEXTURE2);
+	TextureLoc = glGetUniformLocation(GetProgram(), "texture_spec");
+	glUniform1i(TextureLoc, 2); // number is location 2
+	glBindTexture(GL_TEXTURE_2D, SpeculerTextureID);
 
-	glUniform3f(m_Uniforms[FRAG_LIGHTPOS_U], light.GetTransform().GetPos().x,
-		light.GetTransform().GetPos().y,
-		light.GetTransform().GetPos().z);
 
-	glUniform3f(m_Uniforms[FRAG_LIGHTCOLOR_U], light.M_Color.x,
-		light.M_Color.y,
-		light.M_Color.z);
+	//glUniform3f(m_Uniforms[FRAG_LIGHTPOS_U], &lights[0].GetTransform().GetPos().x,
+	//	light.GetTransform().GetPos().y,
+	//	light.GetTransform().GetPos().z);
+
+	//glUniform3f(m_Uniforms[FRAG_LIGHTCOLOR_U], light.M_Color.x,
+	//	light.M_Color.y,
+	//	light.M_Color.z);
 }
 
 Shader::~Shader()
