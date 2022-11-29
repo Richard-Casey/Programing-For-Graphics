@@ -3,13 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 
-
-
 using namespace std;
-
-
-
-
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
 {

@@ -194,9 +194,6 @@ int main(int argc, char* argv[])
 		ImGui::DragFloat("Blue", &bb, 0.01f, 0, 1);
 		ImGui::DragFloat("Light Speed", &lightScaler, 0.01f, 0.5f, 10.0f);
 		
-		printf("%f", br);
-		printf("%f", bg);
-		printf("%f", bb);
 		ImGui::End();
 
 		camera.MouseMoveTarget();
