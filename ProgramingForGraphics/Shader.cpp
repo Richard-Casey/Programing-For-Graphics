@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 
+
 using namespace std;
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string& errorMessage)
@@ -74,6 +75,7 @@ Shader::Shader(const string FileLocation, Camera& camera, string& AmbiantLoc, st
 
 	Texture* texture = new Texture();
 	texture->LoadTexture(directory + "Image.jpg");
+
 
 	AmbiantTextureID = texture->LoadTexture("../resources/" + this->AmbiantLoc);
 	DiffuseTextureID = texture->LoadTexture("../resources/" + this->DiffuseLoc);

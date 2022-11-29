@@ -1,2 +1,4 @@
-﻿  Texture.cpp
+﻿  main.cpp
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(213,12): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\ProgramingForGraphics\main.cpp(214,21): warning C4018: '<': signed/unsigned mismatch
   ProgramingForGraphics.vcxproj -> C:\Users\riche\OneDrive\Desktop\s233122\Programing-For-Graphics\Debug\ProgramingForGraphics.exe

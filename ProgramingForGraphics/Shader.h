@@ -62,7 +62,7 @@ private:
 
 	GLuint m_Uniforms[NUM_UNIFORMS];
 
-	string AmbiantLoc; // Be aware the following code may need to be moved into its own .h and .ccp
+	string AmbiantLoc;
 	string DiffuseLoc;
 	string SpecLoc;
 	string NormalLoc;

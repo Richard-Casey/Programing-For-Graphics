@@ -103,8 +103,6 @@ int main(int argc, char* argv[])
 
 	//Lightbase* light = new Lightbase();
 
-
-
 	vector <uint> Indecies;
 
 	vector<Vertex> LoadedVerts = OBJLoader::LoadOBJ("../resources", "blocks_01.obj",
