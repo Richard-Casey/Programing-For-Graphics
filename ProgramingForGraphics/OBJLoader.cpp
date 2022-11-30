@@ -150,9 +150,7 @@ vector<Vertex> OBJLoader::LoadOBJ(const string& FolderLocation, const string& Fi
 
 					FinalVerts.push_back(vertsInFace[0]);
 					FinalVerts.push_back(vertsInFace[1]);
-					FinalVerts.push_back(vertsInFace[2]);
-
-			
+					FinalVerts.push_back(vertsInFace[2]);			
 
 				}
 
@@ -162,8 +160,6 @@ vector<Vertex> OBJLoader::LoadOBJ(const string& FolderLocation, const string& Fi
 		{
 			indices.push_back(i);
 		}
-
-
 	}
 	else
 	{

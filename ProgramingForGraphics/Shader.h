@@ -7,9 +7,10 @@
 #include "Lightbase.h"
 #include <vector>
 #include "Texture.h"
+#include <iostream>
+#include <stdio.h>
 
 using namespace std;
-
 
 class Shader
 {

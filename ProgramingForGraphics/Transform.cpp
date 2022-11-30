@@ -1,4 +1,5 @@
 #include "Transform.h"
+
 vec3 Transform::GetPos()
 {
 	return m_position;

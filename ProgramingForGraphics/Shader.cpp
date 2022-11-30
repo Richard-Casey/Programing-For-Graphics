@@ -1,9 +1,5 @@
 #include "Shader.h"
 #include <string>
-#include <iostream>
-#include <stdio.h>
-
-
 
 using namespace std;
 
@@ -162,14 +158,32 @@ void Shader::Update(Transform &transform, vector <Lightbase*> lights)
 	glUniform1i(TextureLoc, 2); // number is location 2
 	glBindTexture(GL_TEXTURE_2D, SpeculerTextureID);
 
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[0].position"),
+		lights[0]->GetTransform().GetPos().x,
+		lights[0]->GetTransform().GetPos().y,
+		lights[0]->GetTransform().GetPos().z);
 
-	//glUniform3f(m_Uniforms[FRAG_LIGHTPOS_U], &lights[0].GetTransform().GetPos().x,
-	//	light.GetTransform().GetPos().y,
-	//	light.GetTransform().GetPos().z);
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[0].ambient"), 0.05f, 0.05f, 0.05f);
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[0].diffuse"), 0.8f, 0.8f, 0.8f);
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[0].specular"), 1.0f, 1.0f, 1.0f);
 
-	//glUniform3f(m_Uniforms[FRAG_LIGHTCOLOR_U], light.M_Color.x,
-	//	light.M_Color.y,
-	//	light.M_Color.z);
+	glUniform1f(glGetUniformLocation(GetProgram(), "pointLights[0].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(GetProgram(), "pointLights[0].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(GetProgram(), "pointLights[0].quadratic"), 0.032f);
+
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[1].position"),
+		lights[0]->GetTransform().GetPos().x,
+		lights[0]->GetTransform().GetPos().y,
+		lights[0]->GetTransform().GetPos().z);
+
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[1].ambient"), 0.05f, 0.05f, 0.05f);
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[1].diffuse"), 0.8f, 0.8f, 0.8f);
+	glUniform3f(glGetUniformLocation(GetProgram(), "pointLights[1].specular"), 1.0f, 1.0f, 1.0f);
+
+	glUniform1f(glGetUniformLocation(GetProgram(), "pointLights[1].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(GetProgram(), "pointLights[1].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(GetProgram(), "pointLights[1].quadratic"), 0.032f);
+
 }
 
 Shader::~Shader()

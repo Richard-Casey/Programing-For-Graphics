@@ -1,6 +1,4 @@
 #include "Input.h"
-#include <SDL.h>
-#include "Camera.h"
 
 void Input::Update(void) // Full comments through Game Engine Design input.ccp
 {

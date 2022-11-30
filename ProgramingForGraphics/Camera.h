@@ -7,7 +7,6 @@
 #include "Transform.h"
 #include <SDL.h>
 
-
 class Camera
 {
 public:
@@ -34,14 +33,12 @@ public:
 	void SetCamRot(vec3);
 	void SetCamScale(vec3);
 	void Draw();
-	~Camera();
-	
+	~Camera();	
 
 	void UpdateLocalAxis()
 	{
 		m_Right = normalize(cross(vec3(0, 1, 0), m_Forward));
 		m_Up = cross(m_Forward, m_Right);
-
 	}
 
 	mat4 GetViewMatrix();

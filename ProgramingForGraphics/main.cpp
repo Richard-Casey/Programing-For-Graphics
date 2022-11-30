@@ -23,14 +23,10 @@
 using namespace std;
 #undef main
 
-
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	
-
-
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
@@ -80,7 +76,6 @@ int main(int argc, char* argv[])
 	Camera camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
 	camera.SetCamPos(vec3(0, 0, 0));
 
-
 	string directory = "../resources/";
 
 	Camera* camLookAt = new Camera(70.0f, 800.0f / 600.0f, 0.01f, 500.0f);
@@ -89,29 +84,20 @@ int main(int argc, char* argv[])
 	string DiffuseLoc;
 	string SpecLoc;
 	string NormalLoc;
-
-	Shader* basicShader = new Shader(directory + "Basic", camera, AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc);
 	Texture* texture = new Texture();
-	//texture->LoadTexture(directory + "Image.jpg");
 	Mesh Tri1(&SquareVerticies[0], SquareVerticies.size(), &SquareIndecies[0], 6);
-
 	vector <Lightbase*> lights;
 	lights.push_back(new Lightbase());
 	lights.push_back(new Lightbase());
 	lights[0]->GetTransform().SetPos(vec3(1.0, 0.5, 1.0));// Setting first light position
 	lights[1]->GetTransform().SetPos(vec3(-1.0, -0.5, -1.0)); // Setting second light position
 
-	//Lightbase* light = new Lightbase();
-
 	vector <uint> Indecies;
 
 	vector<Vertex> LoadedVerts = OBJLoader::LoadOBJ("../resources", "blocks_01.obj",
 		AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc, Indecies);
 
-	//GLuint AmbiantTextureID = texture->LoadTexture("../resources/" + AmbiantLoc);
-	//GLuint DiffuseTextureID = texture->LoadTexture("../resources/" + DiffuseLoc);
-	//GLuint SpeculerTextureID = texture->LoadTexture("../resources/" + SpecLoc);
-	//GLuint NormalTextureID = texture->LoadTexture("../resources/" + NormalLoc); //End of code that will prob get moved :/
+	Shader* basicShader = new Shader(directory + "Basic", camera, AmbiantLoc, DiffuseLoc, SpecLoc, NormalLoc);
 
 	Mesh Cube(&LoadedVerts[0], LoadedVerts.size(), &Indecies[0], Indecies.size());
 
@@ -125,7 +111,6 @@ int main(int argc, char* argv[])
 
 	float br=0.1f, bg=0.1f, bb=0.1f;
 	
-
 	glClearColor(br, bg, bb, 1.0f);
 	glViewport(0, 0, 800, 600);
 		
@@ -182,9 +167,7 @@ int main(int argc, char* argv[])
 			window = NULL;
 			SDL_Quit();
 			return 0;
-		}
-		
-		
+		}		
 
 		// Start the Dear ImGui frame
 		ImGui_ImplOpenGL3_NewFrame();
@@ -196,18 +179,15 @@ int main(int argc, char* argv[])
 		if (ImGui::Button("Move Cube")) {
 			Cube.trans.SetPos(camera.M_Transform.GetPos());
 		}
-		ImGui::DragFloat("Red", &br, 0.01f, 0, 1);
-		ImGui::DragFloat("Green", &bg, 0.01f, 0, 1);
-		ImGui::DragFloat("Blue", &bb, 0.01f, 0, 1);
-		ImGui::DragFloat("Light Speed", &lightScaler, 0.01f, 0.5f, 10.0f);
+		ImGui::DragFloat("Red BG", &br, 0.01f, 0, 1);
+		ImGui::DragFloat("Green BG", &bg, 0.01f, 0, 1);
+		ImGui::DragFloat("Blue BG", &bb, 0.01f, 0, 1);
 		
 		ImGui::End();
 
 		camera.MouseMoveTarget();
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 
 		static float i;
 		i += 0.01;
@@ -215,41 +195,15 @@ int main(int argc, char* argv[])
 		{
 			lights[i]->Draw(&camera);
 		}
-		//light->GetTransform().SetPos(vec3(sin(i)* lightScaler, 0, 0));
 		
-
 		basicShader->Bind();
-
-		//// we only have 32 texture units availible to us. 0 to 31
-		//glActiveTexture(GL_TEXTURE0);
-		//GLuint TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_diffuse");
-		//glUniform1i(TextureLoc, 0); // 0 for location 0
-		//glBindTexture(GL_TEXTURE_2D, DiffuseTextureID);
-		//basicShader->Update(Tri1.trans, lights);
-
-		//glActiveTexture(GL_TEXTURE1);
-		//TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_normal");
-		//glUniform1i(TextureLoc, 1);	// 1 for location 1
-		//glBindTexture(GL_TEXTURE_2D, NormalTextureID);
-
-		//glActiveTexture(GL_TEXTURE2);
-		//TextureLoc = glGetUniformLocation(basicShader->GetProgram(), "texture_spec");
-		//glUniform1i(TextureLoc, 2);	// 2 for location 2
-		//glBindTexture(GL_TEXTURE_2D, SpeculerTextureID);
-
 		Tri1.Draw();
-
 		Square1.Draw();
-
 		basicShader->Update(Cube.trans, lights);
-
 		Cube.Draw();
-
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 		SDL_GL_SwapWindow(window);
-		
 		SDL_Delay(16);
 
 	}
@@ -279,8 +233,6 @@ int main(int argc, char* argv[])
 	window = NULL;
 	SDL_Quit();
 
-
 	return 0;
-
 
 }

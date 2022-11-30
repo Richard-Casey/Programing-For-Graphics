@@ -28,9 +28,6 @@ Camera::~Camera()
 }
 
 
-
-
-
 glm::mat4 Camera::GetViewMatrix()
 {
 	m_CurrentTarget = target;

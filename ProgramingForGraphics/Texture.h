@@ -3,12 +3,7 @@
 #include <glew.h>
 #include <string>
 #include <fstream>
-
 #include <iostream>
-
-
-
-
 
 using namespace std;
 
@@ -22,6 +17,5 @@ public:
 	GLuint LoadTexture(string TextureLocation);
 private:
 	GLuint textureID;
-
 };
 

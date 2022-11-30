@@ -8,6 +8,8 @@
 #include "Vertex.h"
 #include <SDL.h>
 #include <glm/gtx/normal.hpp>
+#include <stdio.h>
+#include <vector>
 
 class Mesh
 {
